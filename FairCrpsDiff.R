@@ -1,0 +1,47 @@
+################################
+#
+# ANALYZE DIFFERENCE IN THE FAIR CRPS BETWEEN TWO ENSEMBLE
+# FORECASTING SYSTEMS FOR THE SAME VERIFICATION
+#
+# ens     ... the ensemble (matrix of dimension N*K)
+# ens.ref ... the reference ensemble (matrix of dimension N*K.ref)
+# ver     ... verifications (vector of length N)
+# probs   ... quantiles of the sampling distribution
+#
+################################
+FairCrpsDiff <- function(ens, ens.ref, ver, probs=NA) {
+
+  # sanity checks
+  stopifnot(is.numeric(c(ens, ens.ref, ver)))
+  stopifnot(is.vector(ver), length(ver) > 1)
+  stopifnot(is.matrix(ens), is.matrix(ens.ref))
+  stopifnot(nrow(ens)==length(ver), nrow(ens.ref) == length(ver))
+
+  N <- length(ver)
+  K <- ncol(ens)
+  K.ref <- ncol(ens.ref)
+  ver <- matrix(ver, ncol=1)
+
+  K <- ncol(ens)
+  K.ref <- ncol(ens.ref)
+
+  # calculate fair crps difference
+  crps.ens <- FairCrps(ens, ver)
+  crps.ref <- FairCrps(ens.ref, ver)
+  crps.diff <- crps.ref - crps.ens
+  mean.crps.diff <- mean(crps.diff)
+
+
+  # quantiles of the sampling distribution 
+  cis <- NA
+  if (!any(is.na(probs))) {
+    stopifnot(all(probs > 0 & probs < 1))
+    probs <- sort(probs)
+    cis <- qt(probs, df=N-1) * sd(crps.diff) / sqrt(N) + mean.crps.diff
+    names(cis) <- paste(probs)
+  }
+
+  #return
+  list(crps.diff=mean.crps.diff, sampling.quantiles=cis)
+}
+
