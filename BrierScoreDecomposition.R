@@ -1,0 +1,40 @@
+BrierDecomposition <- function(p, ver, calibration=list(method="bin", bins=10)) {
+
+  # estimate calibration function P(y=1|p)
+  if (calibration[["method"]] == "bin") {
+    # estimate P(y=1|p) by NumberOf(y=1 & p in bin i) / NumberOf(p in bin i)
+    bins <- calibration[["bins"]]
+    # define number of bins and bin breaks
+    if (length(bins) == 1) {
+      nbins <- bins
+      brx <- seq(0, 1, nbins + 1)
+    } else {
+      nbins <- length(bins) - 1
+      brx <- bins
+    }
+    # estimate conditional event frequency
+    p.hist <- hist(x=p, breaks=brx, plot=FALSE)$counts
+    cond.counts <- hist(x=p[ver==1], breaks=brx, plot=FALSE)$counts
+    cond.freq <- cond.counts / p.hist
+
+    # match p and P(y=1|p)
+    p.bin <- cut(x=p, breaks=brx, include.lowest=TRUE, labels=FALSE)
+    cal <- cond.freq[ p.bin ]
+  } else if (calibration[["method"]] == "logistic") {
+    # estimate P(y=1|p) by a logistic regression model 
+    cal <- glm(y~p, family="binomial")$fitted
+  }
+
+  # estimate climatology
+  clim <- mean(y)
+
+  # calculate the components
+  REL <- mean((p - cal)^2, na.rm=TRUE)
+  RES <- mean((cal - clim)^2, na.rm=TRUE)
+  UNC <- clim * (1 - clim)
+
+  # return the decomposition
+  c(REL=REL, RES=RES, UNC=UNC)
+
+}
+
