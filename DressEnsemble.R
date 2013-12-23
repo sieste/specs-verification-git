@@ -8,7 +8,7 @@ DressEnsemble <- function(ens, dressing.method="silverman", parameters=NA) {
   }
 
   # create object
-  dressed.ens <- list(ens=ens, ker.wd=ker.wd)
+  dressed.ens <- list(ens=ens, ker.wd=ker.wd, ker.type="gauss")
   class(dressed.ens) <- "dressed.ens"
 
   # return
