@@ -1,3 +1,7 @@
+source("DressCrps.R")
+source("DressIgn.R")
+source("DressEnsemble.R")
+
 FitAkdParameters <- function(ens, obs) {
 
   #       p(y|x) = 1 / K * sum {dnorm(y, z.i(x), s(x))}
@@ -13,24 +17,32 @@ FitAkdParameters <- function(ens, obs) {
 
   # initial guesses
   m1 <- lm(obs~m.x)
-  m2 <- lm(resid(m1)~v.x)
+  m2 <- lm(resid(m1)^2~v.x)
   r0 <- coef(m1)[1]
   s1 <- coef(m2)[1]
   s2 <- 1
-  r2 <- ifelse(test = (coef(m2)[2] <= s2),
   r2 <- ifelse(test = coef(m2)[2] <= s2,
                yes = 0,
                no = sqrt((coef(m2)[2] - s2) * sf.2))
   r1 <- coef(m1)[2] - r2
 
-  # optimizing the dressing crps using optim ?
-  parms <- c(r0, r1, r2, s1, s2)
-  crps <- function(parms) {
-    # ...
+  # optimize the dressing crps using optim(...)
+  f <- function(parms) {
+    d.ens <- DressEnsemble(ens, "akd", as.list(parms))
+    mean(DressCrps(d.ens, obs))
   }
-  # optim ...
-    
-
-
+  grad <- NULL
+  theta <- c(r0, r1, r2, s1, s2)
+  names(theta) <- c("r0", "r1", "r2", "s1", "s2")
+  ui <- cbind(0, 0, 0, 1, v.x)
+  ci <- 0  
+  if (any(ui %*% theta < 0)) {
+    theta["s1"] <- 1
+  }
+  opt <- constrOptim(theta, f, grad, ui, ci)
+  
+  # return
+  opt$par
 }
+
 
