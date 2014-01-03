@@ -6,8 +6,8 @@ DressEnsemble <- function(ens, dressing.method="silverman",
   if (dressing.method == "silverman") {
     n.members <- rowSums(!is.na(ens))
     if (any(n.members==1)) {
-      warning(paste("Some ensembles have only one member.",
-                    "The kernel width is set to zero for these."))
+      warning(c("Some ensembles have only one member. ",
+                "The kernel width is set to zero for these."))
     }
     stdevs <- apply(ens, 1, sd, na.rm=TRUE)
     ker.wd <- (4 * stdevs^5 / (3 * n.members))^0.2
@@ -24,16 +24,21 @@ DressEnsemble <- function(ens, dressing.method="silverman",
   # where   s(x) = s1 + s2 * (4 / 3 / K) ^ 0.4 * var(x)
   # and   z.i(x) = r0 + r1 * mean(x) + r2 * x[i]
   if (dressing.method=="akd") {
-    stopifnot(all(names(parameters) %in% c("r0", "r1", "r2", "s1", "s2")))
-    k <- rowSums(!is.na(ens))
-    var.ens <- apply(ens, 1, var, na.rm=TRUE)
-    z <- with(parameters, r0 + r1 * rowMeans(ens, na.rm=TRUE) + r2 * ens)
-    s2 <- with(parameters, s1 + s2 * (4 / 3 / k) ^ .4 * var.ens)
-    s <- sapply(s2, function(x) sqrt(max(x, 0)))
- 
-    K <- max(k)
-    ker.wd <- matrix(rep(s, K), ncol=K)
+
+    stopifnot(all(names(parameters) %in% c("a", "r1", "r2", "s1", "s2")))
+
+    K <- max(rowSums(!is.na(ens)))
+    v.x <- apply(ens, 1, var, na.rm=TRUE)
+    m.x <- rowMeans(ens, na.rm=TRUE)
+    sf.2 <- (4 / 3 / K) ^ 0.4
+
+    z <- with(parameters, r1 + r2 * m.x  + a * ens)
     ens <- z
+
+    s2 <- with(parameters, sf.2 * (s1 + s2 * a * a * v.x))
+    s <- sapply(s2, function(x) sqrt(max(x, 0)))
+    ker.wd <- matrix(rep(s, K), ncol=K)
+
     ker.type <- "gauss"
   }
 
