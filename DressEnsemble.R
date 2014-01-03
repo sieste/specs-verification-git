@@ -22,8 +22,8 @@ DressEnsemble <- function(ens, dressing.method="silverman",
   # affine kernel dressing
   #
   #       p(y|x) = 1 / K * sum {dnorm(y, z.i(x), s(x))}
-  # where   s(x) = s1 + s2 * [0.25 * (4 / 3 / K) ^ 0.4] * var(x)
-  # and   z.i(x) = r0 + r1 * mean(x) + r2 * x[i]
+  # where   s(x) = 0.25*(4/3/K)^0.4 * (s1 + s2 * a^2 * var(x))
+  # and   z.i(x) = r1 + r2 * mean(x) + a * x[i]
   #
   # dressing parameters a, r1, r2, s1, s2 are provided by the user
   if (dressing.method=="akd") {
