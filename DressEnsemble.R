@@ -18,11 +18,14 @@ DressEnsemble <- function(ens, dressing.method="silverman",
     ker.type <- "gauss"
   }
 
+  #
   # affine kernel dressing
   #
   #       p(y|x) = 1 / K * sum {dnorm(y, z.i(x), s(x))}
   # where   s(x) = s1 + s2 * (4 / 3 / K) ^ 0.4 * var(x)
   # and   z.i(x) = r0 + r1 * mean(x) + r2 * x[i]
+  #
+  # dressing parameters a, r1, r2, s1, s2 are provided by the user
   if (dressing.method=="akd") {
 
     stopifnot(all(names(parameters) %in% c("a", "r1", "r2", "s1", "s2")))
