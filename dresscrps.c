@@ -5,9 +5,9 @@
 // requires the gnu scientific library (GSL)
 // 
 // compile with:
-//   PKG_LIBS="-lgsl -lm -L/usr/lib" R CMD SHLIB dresscrps.c
+//   PKG_LIBS="-lgsl -lgslcblas -lm -L/usr/lib" R CMD SHLIB dresscrps.c
 //
-// the -L/usr/lib indicates where the gsl files live, 
+// the -L/usr/lib indicates where the gsl libraries live, 
 // might be different for different users
 //
 // to call the DLL from R do:
