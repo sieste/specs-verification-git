@@ -22,7 +22,7 @@ DressEnsemble <- function(ens, dressing.method="silverman",
   # affine kernel dressing
   #
   #       p(y|x) = 1 / K * sum {dnorm(y, z.i(x), s(x))}
-  # where   s(x) = s1 + s2 * (4 / 3 / K) ^ 0.4 * var(x)
+  # where   s(x) = s1 + s2 * [0.25 * (4 / 3 / K) ^ 0.4] * var(x)
   # and   z.i(x) = r0 + r1 * mean(x) + r2 * x[i]
   #
   # dressing parameters a, r1, r2, s1, s2 are provided by the user
@@ -33,7 +33,7 @@ DressEnsemble <- function(ens, dressing.method="silverman",
     K <- max(rowSums(!is.na(ens)))
     v.x <- apply(ens, 1, var, na.rm=TRUE)
     m.x <- rowMeans(ens, na.rm=TRUE)
-    sf.2 <- (4 / 3 / K) ^ 0.4
+    sf.2 <- 0.25 * (4 / 3 / K) ^ 0.4
 
     z <- with(parameters, r1 + r2 * m.x  + a * ens)
     ens <- z
@@ -62,7 +62,7 @@ DressEnsemble <- function(ens, dressing.method="silverman",
     K <- max(rowSums(!is.na(ens)))
     v.x <- apply(ens, 1, var, na.rm=TRUE)
     m.x <- rowMeans(ens, na.rm=TRUE)
-    sf.2 <- (4 / 3 / K) ^ 0.4
+    sf.2 <- 0.25 * (4 / 3 / K) ^ 0.4
 
     z <- with(parms, r1 + r2 * m.x  + a * ens)
     ens <- z
