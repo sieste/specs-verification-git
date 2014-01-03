@@ -45,6 +45,35 @@ DressEnsemble <- function(ens, dressing.method="silverman",
     ker.type <- "gauss"
   }
 
+
+  #
+  # affine kernel dressing as above, but parameter are estimated by optimizing
+  # crps with respect to obs (which must be provided as parameters)
+  #
+  if (dressing.method=="akd.fit") {
+
+    stopifnot(any(names(parameters) == "obs"))
+    obs <- parameters[["obs"]]
+
+    stopifnot(length(obs) == nrow(ens))
+
+    parms <- as.list(FitAkdParameters(ens, obs))
+
+    K <- max(rowSums(!is.na(ens)))
+    v.x <- apply(ens, 1, var, na.rm=TRUE)
+    m.x <- rowMeans(ens, na.rm=TRUE)
+    sf.2 <- (4 / 3 / K) ^ 0.4
+
+    z <- with(parms, r1 + r2 * m.x  + a * ens)
+    ens <- z
+
+    s2 <- with(parms, sf.2 * (s1 + s2 * a * a * v.x))
+    s <- sapply(s2, function(x) sqrt(max(x, 0)))
+    ker.wd <- matrix(rep(s, K), ncol=K)
+
+    ker.type <- "gauss"
+  }
+
   # create object
   dressed.ens <- list(ens=ens, ker.wd=ker.wd, ker.type=ker.type)
   class(dressed.ens) <- "dressed.ens"
@@ -52,6 +81,8 @@ DressEnsemble <- function(ens, dressing.method="silverman",
   # return
   dressed.ens
 }
+
+
 
 # return ensemble density at a matrix of x values
 GetDensity <- function(dressed.ens, x) {
