@@ -7,7 +7,8 @@ DressCrps <- function(dressed.ens, obs) {
     # C implementation
     crps <- with(dressed.ens, {
       sapply(1:N, function(ii) {
-        .C("dresscrps", as.double(ens[ii,]), as.integer(K.vec[ii]),
+        .C("dresscrps", PACKAGE="SpecsVerification", 
+           as.double(ens[ii,]), as.integer(K.vec[ii]),
            as.double(ker.wd[ii,]), as.double(obs[ii]), tmp=double(1)
           )[["tmp"]]
       })
