@@ -1,7 +1,3 @@
-if (file.exists("dresscrps.so")) {
-  dyn.load("dresscrps.so")
-}
-
 # return a vector of crps for dressed ensembles
 DressCrps <- function(dressed.ens, obs) {
   N <- nrow(dressed.ens[["ens"]])
