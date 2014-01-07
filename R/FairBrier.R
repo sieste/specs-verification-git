@@ -9,7 +9,7 @@
 # reference: Ferro (2013) "Fair scores for ensemble forecasts"
 #
 ################################
-fairbrier <- function(ens, ver, tau=0.5) {
+FairBrier <- function(ens, ver, tau=0.5) {
   ver <- matrix(ver, ncol=1)
   if (is.null(dim(ens))) {
     ens <- matrix(ens, nrow=1)

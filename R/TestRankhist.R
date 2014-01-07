@@ -3,7 +3,7 @@
 # RANK HISTOGRAM SIGNIFICANCE TESTS #
 #                                   #
 #####################################
-rankhist.tests <- function(rank.hist) {
+RankhistTests <- function(rank.hist) {
 #
 # Conduct a series of significance tests for flatness of the rank histogram
 #
