@@ -3,7 +3,7 @@
 # RANK HISTOGRAM FOR ENSEMBLE FORECASTS #
 #                                       #
 #########################################
-rankhist <- function(ens, ver) {
+Rankhist <- function(ens, ver) {
 #
 # calculate the rank histogram of a collection of ensemble forecasts
 #
