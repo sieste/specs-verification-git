@@ -6,7 +6,7 @@ Authors@R: c(person("Stefan", "Siegert", role = c("aut", "cre"),
                      email = "s.siegert@exeter.ac.uk"))
 Author: Stefan Siegert
 Maintainer: Stefan Siegert <s.siegert@exeter.ac.uk>
-Depends: R 
+Depends:
 Description: A collection of new forecast verification for the SPECS FP7 project. The emphasis is on comparative verification of ensemble forecasts.
 License: GPL (>= 2)
 
