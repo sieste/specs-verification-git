@@ -1,7 +1,7 @@
 FitAkdParameters <- function(ens, obs) {
 
   #       p(y|x) = 1 / K * sum {dnorm(y, z.i(x), s(x))}
-  # where   s(x) = 0.25*(4/3/K)^0.4 * (s1 + s2 * a^2 * var(x))
+  # where   s(x) = (4/3/K)^0.4 * (s1 + s2 * a^2 * var(x))
   # and   z.i(x) = r1 + r2 * mean(x) + a * x[i]
 
   # ensemble means
@@ -10,7 +10,7 @@ FitAkdParameters <- function(ens, obs) {
   v.x <-  apply(ens, 1, var, na.rm=TRUE)
   # squared silverman factor 
   K <- max(rowSums(!is.na(ens)))
-  sf.2 <- 0.25 * (4 / 3 / K) ^ 0.4
+  sf.2 <- (4 / 3 / K) ^ 0.4
 
   # initial guesses
   m1 <- lm(obs~m.x)
