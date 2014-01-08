@@ -18,7 +18,9 @@ Install the package:
 
     R CMD INSTALL SpecsVerification_{%Version}.tar.gz -l /tmp
 
-Load the package in an R session:
+Load the package in an R session and list all its functions:
 
     library("SpecsVerification", lib.loc="/tmp")
+    ls("package:SpecsVerification")
+
 
