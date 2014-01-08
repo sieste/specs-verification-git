@@ -1,24 +1,24 @@
-# SPECS verification
+## SPECS verification
 
 This is the official repository of forecast verification routines for the SPECS FP7 project.
 
-## Download, build, install, load
+### Download, build, install, load
 
-### Download the development branch of this repository to `/tmp`
+Download the development branch of this repository to `/tmp`
 
     cd /tmp
     wget "https://github.com/sieste/specs-verification-git/archive/develop.zip" 
     unzip develop.zip
 
-### Build the package:
+Build the package:
 
     R CMD build specs-verification-git-develop
     
-### Install the package:
+Install the package:
 
     R CMD INSTALL SpecsVerification_{%Version}.tar.gz -l /tmp
 
-### Load the package in an R session:
+Load the package in an R session:
 
     library("SpecsVerification", lib.loc="/tmp")
 
