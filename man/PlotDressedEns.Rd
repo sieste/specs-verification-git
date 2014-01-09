@@ -19,8 +19,8 @@ none
 }
 \examples{
   # Example:
-  ens <- matrix(rnorm(500),100,5)
-  obs <- rnorm(100)
+  ens <- matrix(rnorm(20),4,5)
+  obs <- rnorm(4)
   d.ens <- DressEnsemble(ens)
   PlotDressedEns(d.ens, add=FALSE, obs=obs, plot.ens=FALSE, plot.ker=TRUE)
 }
