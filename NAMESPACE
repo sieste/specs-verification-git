@@ -15,4 +15,5 @@ export(FairBrierDiff)
 export(FairBrier)
 export(FairCrps)
 export(RankhistTests) 
+export(PlotDressedEns)
 
