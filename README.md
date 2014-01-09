@@ -26,5 +26,6 @@ Load the package in an R session and list all its functions:
 
 ### Changelog
 
+* 2014-01-09: added and documented `GetDensity` function for dressed ensembles
 * 2014-01-09: added and documented `PlotDressedEns` function
 * 2014-01-08: Version 0.0-1 ready for testing
