@@ -24,3 +24,7 @@ Load the package in an R session and list all its functions:
     ls("package:SpecsVerification")
 
 
+### Changelog
+
+* 2014-01-09: added and documented `PlotDressedEns` function
+* 2014-01-08: Version 0.0-1 ready for testing
