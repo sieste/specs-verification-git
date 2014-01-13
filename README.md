@@ -16,11 +16,11 @@ Mac and Windows users click on the `Download ZIP` link on the right of this page
 
     R CMD build specs-verification-git-develop
     
-**Install** the package by
+**Install** the package to the library directory `/tmp` by
 
     R CMD INSTALL SpecsVerification_0.0-1.tar.gz -l /tmp
 
-Open `R`. In `R`, **load** the package, and list all its functions:
+Open `R`. In `R`, **load** the package from the library directory `/tmp`, and list all its functions:
 
     library("SpecsVerification", lib.loc="/tmp")
     ls("package:SpecsVerification")
