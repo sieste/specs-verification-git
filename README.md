@@ -2,7 +2,7 @@
 
 This is the official repository of forecast verification routines for the SPECS FP7 project.
 
-### Download, build, install, load
+### Download, install, load
 
 **Download** the development branch of this repository to `/tmp`. In the Linux shell, do
 
@@ -12,15 +12,13 @@ This is the official repository of forecast verification routines for the SPECS 
 
 Mac and Windows users click on the `Download ZIP` link on the right of this page and save to a temporary directory. Extract the zip archive to the temporary directory using your favourite file extraction tool.
 
-**Build** the package. Open a terminal, go to the directory where you unzipped the above file and do
+**Install** the package from source. Open a `R` session and enter the command
 
-    R CMD build specs-verification-git-develop
+    install.packages("/tmp/specs-verification-git-develop", repo=NULL, lib="/tmp")
     
-**Install** the package to the library directory `/tmp` by
+Replace the `/tmp` directory as necessary. Omitting the `lib="/tmp"` will install to your default library directory, which you probably do not want at the present stage of development.
 
-    R CMD INSTALL SpecsVerification_0.0-1.tar.gz -l /tmp
-
-Open `R`. In `R`, **load** the package from the library directory `/tmp`, and list all its functions:
+To **load** the package from the library directory `/tmp`, and list all its functions, do
 
     library("SpecsVerification", lib.loc="/tmp")
     ls("package:SpecsVerification")
