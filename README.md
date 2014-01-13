@@ -4,13 +4,13 @@ This is the official repository of forecast verification routines for the SPECS 
 
 ### Download, build, install, load
 
-**Download** the development branch ([link](https://github.com/sieste/specs-verification-git/archive/master.zip) of this repository to `/tmp`. In the Linux shell, do
+**Download** the development branch of this repository to `/tmp`. In the Linux shell, do
 
     cd /tmp
     wget "https://github.com/sieste/specs-verification-git/archive/develop.zip" 
     unzip develop.zip
 
-Mac and Windows users click on the `Download ZIP` link on the right of this page and save to a temporary directory.
+Mac and Windows users click on the `Download ZIP` link on the right of this page and save to a temporary directory. Extract the zip archive to the temporary directory using your favourite file extraction tool.
 
 **Build** the package. Open a terminal, go to the directory where you unzipped the above file and do
 
