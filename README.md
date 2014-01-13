@@ -4,21 +4,23 @@ This is the official repository of forecast verification routines for the SPECS 
 
 ### Download, build, install, load
 
-Download the development branch of this repository to `/tmp`
+**Download** the development branch ([link](https://github.com/sieste/specs-verification-git/archive/master.zip) of this repository to `/tmp`. In the Linux shell, do
 
     cd /tmp
     wget "https://github.com/sieste/specs-verification-git/archive/develop.zip" 
     unzip develop.zip
 
-Build the package:
+Mac and Windows users click on the `Download ZIP` link on the right of this page and save to a temporary directory.
+
+**Build** the package. Open a terminal, go to the directory where you unzipped the above file and do
 
     R CMD build specs-verification-git-develop
     
-Install the package:
+**Install** the package by
 
-    R CMD INSTALL SpecsVerification_{%Version}.tar.gz -l /tmp
+    R CMD INSTALL SpecsVerification_0.0-1.tar.gz -l /tmp
 
-Load the package in an R session and list all its functions:
+Open `R`. In `R`, **load** the package, and list all its functions:
 
     library("SpecsVerification", lib.loc="/tmp")
     ls("package:SpecsVerification")
