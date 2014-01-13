@@ -1,2 +1,1 @@
-PKG_LIBS = -lgsl -lgslcblas -lm -L/usr/lib
 
