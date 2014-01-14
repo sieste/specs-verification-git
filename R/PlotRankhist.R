@@ -3,7 +3,7 @@
 # PLOT RANK HISTOGRAM          #
 #                              #
 ################################
-PlotRankhist <- function(rank.hist, mode=c("raw", "prob.paper")) {
+PlotRankhist <- function(rank.hist, mode="raw") {
 #
 #
 # Plot the rank histogram raw or on probability paper
