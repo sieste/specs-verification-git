@@ -14,7 +14,7 @@ Mac and Windows users click on the `Download ZIP` link on the right of this page
 
 **Install** the package from source. Open a `R` session and enter the command
 
-    install.packages("/tmp/specs-verification-git-develop", repo=NULL, lib="/tmp")
+    install.packages("/tmp/specs-verification-git-develop", repo=NULL, lib="/tmp", type="source")
     
 Replace the `/tmp` directory as necessary. Omitting the `lib="/tmp"` will install to your default library directory, which you probably do not want at the present stage of development.
 
