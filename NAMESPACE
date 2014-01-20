@@ -1,5 +1,5 @@
 useDynLib(SpecsVerification)
-export(BrierDecomposition)
+export(BrierScoreDecomposition)
 export(FairCrpsDiff)
 export(FitAkdParameters)
 export(DressCrps)
