@@ -1,4 +1,4 @@
-BrierDecomposition <- function(p, y, calibration=list(method="bin", bins=10)) {
+BrierScoreDecomposition <- function(p, y, calibration=list(method="bin", bins=10)) {
 
   stopifnot(all(p >= 0), all(p <= 1), all(y==0 | y==1))
 
