@@ -1,5 +1,7 @@
 BrierDecomposition <- function(p, y, calibration=list(method="bin", bins=10)) {
 
+  stopifnot(all(p >= 0), all(p <= 1), all(y==0 | y==1))
+
   # estimate calibration function P(y=1|p)
   if (calibration[["method"]] == "bin") {
     # estimate P(y=1|p) by NumberOf(y=1 and p in bin i) / NumberOf(p in bin i)
@@ -27,6 +29,8 @@ BrierDecomposition <- function(p, y, calibration=list(method="bin", bins=10)) {
   } else if (calibration[["method"]] == "logistic") {
     # estimate P(y=1|p) by a logistic regression model 
     cal <- glm(y~p, family="binomial")$fitted
+  } else {
+    stop(paste("unknown calibration method:", calibration[["method"]]))
   }
 
   # estimate climatology
