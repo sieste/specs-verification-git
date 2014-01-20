@@ -7,8 +7,9 @@ BrierDecomposition <- function(p, ver, calibration=list(method="bin", bins=10)) 
     # define number of bins and bin breaks
     if (length(bins) == 1) {
       nbins <- bins
-      brx <- seq(0, 1, nbins + 1)
+      brx <- seq(0, 1, length.out = nbins + 1)
     } else {
+      stopifnot(bins[1] == 0, bins[length(bins)] == 1)
       nbins <- length(bins) - 1
       brx <- bins
     }
