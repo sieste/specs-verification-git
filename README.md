@@ -26,6 +26,7 @@ To **load** the package from the library directory `/tmp`, and list all its func
 
 ### Changelog
 
+* 2014-01-19: major cleanup
 * 2014-01-19: `FairBrier`: added documentation
 * 2014-01-19: `BrierScoreDecomposition`: added documentation, fixed some bugs
 * 2014-01-14: `PlotRankhist`: added documentation
