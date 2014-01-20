@@ -36,8 +36,8 @@ FairBrierDiff <- function(ens, ens.ref, ver, tau=0.5, probs=NA) {
   K.ref <- ncol(ens.ref)
 
   # calculate fair Brier score differences
-  br.ens <- fairbrier(ens, ver, tau)
-  br.ref <- fairbrier(ens.ref, ver, tau)
+  br.ens <- FairBrier(ens, ver, tau)
+  br.ref <- FairBrier(ens.ref, ver, tau)
   br.diff <- br.ref - br.ens
   mean.br.diff <- mean(br.diff)
 
