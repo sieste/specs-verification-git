@@ -42,16 +42,14 @@ The calibration function F(p) must be estimated from the data `y` and `p`, for w
 }
 \examples{
   # Example:
-  p <- rbeta(n=100, shape1=1, shape1=3)
+  p <- rbeta(n=100, shape1=1, shape2=3)
   y <- rbinom(n=100, size=1, prob=p^0.9)
   BrierScoreDecomposition(p, y, calibration=list(method="bin", bins=5))
 }
 \references{
-A.H. Murphy (1973). A new vector partition of the probability score. J. Appl. Met.,
-12:595--600. doi: 10.1175/1520-0450(1973)012<0595:ANVPOT>2.0.CO;2.
+A.H. Murphy (1973). A new vector partition of the probability score. J. Appl. Met., 12:595--600. doi: 10.1175/1520-0450(1973)012<0595:ANVPOT>2.0.CO;2.
 
-J. Broecker. Reliability, sufficiency, and the decomposition of proper scores. Q. J. 
-Roy. Met. Soc., 135(643):1512--1519, 2009. doi: 10.1002/qj.456.
+J. Broecker. Reliability, sufficiency, and the decomposition of proper scores. Q. J. Roy. Met. Soc., 135(643):1512--1519, 2009. doi: 10.1002/qj.456.
 }
 
 
