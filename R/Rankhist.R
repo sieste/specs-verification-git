@@ -3,17 +3,17 @@
 # RANK HISTOGRAM FOR ENSEMBLE FORECASTS #
 #                                       #
 #########################################
-Rankhist <- function(ens, ver) {
+Rankhist <- function(ens, obs) {
 #
 # calculate the rank histogram of a collection of ensemble forecasts
 #
 # Usage: 
-#   rh <- rankhist(ens=ens, ver=ver)
+#   rh <- rankhist(ens=ens, obs=obs)
 #
 # Arguments:
 #
 #   ens ... N*K matrix, rows are the ensemble forecasts
-#   ver ... N vector of corresponding verifications
+#   obs ... N vector of corresponding observations
 #
 # Return value:
 #   a vector of verification rank frequencies
@@ -25,8 +25,8 @@ Rankhist <- function(ens, ver) {
 #
 # Example:
 #   ens <- matrix(rnorm(5*100), 100, 5)
-#   ver <- rnorm(100)
-#   rh <- rankhist(ens, ver)
+#   obs <- rnorm(100)
+#   rh <- rankhist(ens, obs)
 #
 # References: 
 #   Talagrand (1997)
@@ -35,8 +35,8 @@ Rankhist <- function(ens, ver) {
 #
   N <- dim(ens)[1]
   K <- dim(ens)[2]
-  stopifnot(N == length(ver))
-  ranks <- apply(cbind(ver, ens), 1, rank, ties.method="random")[1, ]
+  stopifnot(N == length(obs))
+  ranks <- apply(cbind(obs, ens), 1, rank, ties.method="random")[1, ]
   rank.hist <- hist(ranks, breaks=seq(0.5, K+1.5, 1), plot=FALSE)$counts
   return(rank.hist)
 }

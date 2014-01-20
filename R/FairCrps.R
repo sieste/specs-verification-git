@@ -3,7 +3,7 @@
 # THE FAIR CONTINUOUSLY RANKED PROBABILITY SCORE
 #
 # ens ... ensemble values (matrix of dimension N*K)
-# ver ... verification (vector of length N)
+# obs ... observations (vector of length N)
 #
 # references: * Gneiting, Raftery (2007) "Probabilistic forecasts,
 #               calibration and sharpness"
@@ -12,9 +12,9 @@
 #               ranked probability scores"
 #
 ################################
-FairCrps <- function(ens, ver) {
-  ver <- as.vector(ver)
-  if (length(ver) == 1) {
+FairCrps <- function(ens, obs) {
+  obs <- as.vector(obs)
+  if (length(obs) == 1) {
   # single instance
     if (is.matrix(ens)) {
       ens <- as.vector(ens)
@@ -22,20 +22,20 @@ FairCrps <- function(ens, ver) {
     K <- length(ens)
     if (K == 1) {
     # for one ensemble member, the crps reduces to the absolute error
-      crps <- abs(ens - ver)
+      crps <- abs(ens - obs)
     } else {
-      crps <- mean(abs(ens - ver)) - sum(dist(ens)) / K / (K - 1)
+      crps <- mean(abs(ens - obs)) - sum(dist(ens)) / K / (K - 1)
     }
   } else {
   # multiple instances
-    N <- length(ver)
+    N <- length(obs)
     K <- ncol(ens)
-    stopifnot(length(ver) == nrow(ens))
+    stopifnot(length(obs) == nrow(ens))
     if (K == 1) {
-      crps <- abs(ens - ver)
+      crps <- abs(ens - obs)
     } else {
       crps <- sapply(1:N, function(i) 
-                mean(abs(ens[i,] - ver[i])) - sum(dist(ens[i,])) / K / (K - 1)
+                mean(abs(ens[i,] - obs[i])) - sum(dist(ens[i,])) / K / (K - 1)
               )
     }
   }

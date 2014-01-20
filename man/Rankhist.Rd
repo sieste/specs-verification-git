@@ -5,11 +5,11 @@
   Calculate the rank histogram for an archive of ensemble forecasts and their corresponding verifying observations.
 }
 \usage{
-Rankhist(ens, ver)
+Rankhist(ens, obs)
 }
 \arguments{
   \item{ens}{matrix of dimension (N,K). An archive of K-member ensemble forecasts for N time instances.}
-  \item{ver}{vector of length N. The corresponding verifying observations.}
+  \item{obs}{vector of length N. The corresponding verifying observations.}
 }
 \examples{
   # Example:

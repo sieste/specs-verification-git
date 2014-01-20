@@ -4,20 +4,20 @@
 #                                                                    #
 ######################################################################
 ReliabilityDiagram <- 
-function(probs, ver, bins=10, nboot=500, 
+function(probs, obs, bins=10, nboot=500, 
          plot=FALSE, plot.refin=TRUE, mc.cores=1, 
          cons.probs=c(0.025, 0.975)) 
 {
   #
   # Plot reliability diagram for a probability forecast
   #
-  # Usage: rel.diag(probs, ver, nbins, nboot)
+  # Usage: rel.diag(probs, obs, nbins, nboot)
   #
   # Arguments:
   #
   #    probs ... vector of length N, probs[k] has the predicted probability for
-  #              the event ver[k] 
-  #    ver ... ver[k] = 1 if the event happened at instance k, ver[k] = 0
+  #              the event obs[k] 
+  #    obs ... obs[k] = 1 if the event happened at instance k, obs[k] = 0
   #            otherwise
   #    bins ... either scalar: number of equidistant bins to discretize the
   #                            forecast probabilities,
@@ -85,9 +85,9 @@ function(probs, ver, bins=10, nboot=500,
 
 
   # sanity checks
-  stopifnot(length(probs) == length(ver))
+  stopifnot(length(probs) == length(obs))
   stopifnot(nboot >= 0, mc.cores >= 0)
-  stopifnot(all(probs >= 0), all(probs <= 1), all(ver %in% c(0,1)))
+  stopifnot(all(probs >= 0), all(probs <= 1), all(obs %in% c(0,1)))
   stopifnot(length(cons.probs) == 2, all(cons.probs >= 0), all(cons.probs <= 1))
   stopifnot(require(multicore) & mc.cores==1)
   if(require(multicore)) {
@@ -97,7 +97,7 @@ function(probs, ver, bins=10, nboot=500,
   }
 
   # some definitions and corrections
-  n <- length(ver)
+  n <- length(obs)
   mc.cores <- floor(mc.cores)
   nboot <- floor(nboot)
   cons.probs <- sort(cons.probs)
@@ -118,7 +118,7 @@ function(probs, ver, bins=10, nboot=500,
   h <- hist(probs, breaks=brx, plot=FALSE)$counts        
 
   # estimate calibration function
-  g <- hist(probs[ver==1], breaks=brx, plot=FALSE)$counts
+  g <- hist(probs[obs==1], breaks=brx, plot=FALSE)$counts
   obar.i <- g / h 
   obar.i[ is.nan(obar.i) ] <- NA
   

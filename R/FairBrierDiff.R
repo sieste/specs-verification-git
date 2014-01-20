@@ -1,11 +1,11 @@
 ################################
 #
 # ANALYZE DIFFERENCE IN THE FAIR BRIER SCORE BETWEEN TWO ENSEMBLE
-# FORECASTING SYSTEMS FOR THE SAME VERIFICATION
+# FORECASTING SYSTEMS FOR THE SAME OBSERVATION
 #
 # ens     ... ensemble to be tested (matrix of dimension N*K)
 # ens.ref ... reference forecast ensemble (matrix of dimension N*K.ref)
-# ver     ... verifications (vector of length N)
+# obs     ... observations (vector of length N)
 # tau     ... threshold, whose exceedance defines the "event" (scalar, or
 #             vector of length N)
 #             the default is 0.5, such that ensemble members can be given as
@@ -18,26 +18,26 @@
 #                              of `br.diff`
 #
 ################################
-FairBrierDiff <- function(ens, ens.ref, ver, tau=0.5, probs=NA) {
+FairBrierDiff <- function(ens, ens.ref, obs, tau=0.5, probs=NA) {
 
   # sanity checks
-  stopifnot(is.numeric(c(ens, ens.ref, ver, tau)))
-  stopifnot(is.vector(ver))
-  stopifnot(length(ver) > 1)
+  stopifnot(is.numeric(c(ens, ens.ref, obs, tau)))
+  stopifnot(is.vector(obs))
+  stopifnot(length(obs) > 1)
   stopifnot(is.matrix(ens))
   stopifnot(is.matrix(ens.ref))
-  stopifnot(nrow(ens)==length(ver))
-  stopifnot(nrow(ens.ref) == length(ver))
+  stopifnot(nrow(ens)==length(obs))
+  stopifnot(nrow(ens.ref) == length(obs))
   stopifnot(is.numeric(tau))
-  stopifnot(length(tau) == 1 | length(tau) == length(ver))
+  stopifnot(length(tau) == 1 | length(tau) == length(obs))
 
-  N <- length(ver)
+  N <- length(obs)
   K <- ncol(ens)
   K.ref <- ncol(ens.ref)
 
   # calculate fair Brier score differences
-  br.ens <- FairBrier(ens, ver, tau)
-  br.ref <- FairBrier(ens.ref, ver, tau)
+  br.ens <- FairBrier(ens, obs, tau)
+  br.ref <- FairBrier(ens.ref, obs, tau)
   br.diff <- br.ref - br.ens
   mean.br.diff <- mean(br.diff)
 

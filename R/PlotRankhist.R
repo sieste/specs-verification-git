@@ -34,8 +34,8 @@ PlotRankhist <- function(rank.hist, mode="raw") {
 # Example:
 # 
 #   ens <- matrix(rnorm(500), 100, 5)
-#   ver <- rnorm(100)
-#   rh <- rankhist(ens, ver)
+#   obs <- rnorm(100)
+#   rh <- rankhist(ens, obs)
 #   PlotRankhist(rank.hist = rh, mode="prob.paper")
 #
 # References: 

@@ -26,8 +26,8 @@ RankhistTests <- function(rank.hist) {
 # Example:
 # 
 #   ens <- matrix(rnorm(500), 100, 5)
-#   ver <- rnorm(100)
-#   rh <- rankhist(ens, ver)
+#   obs <- rnorm(100)
+#   rh <- rankhist(ens, obs)
 #   rankhist.tests(rank.hist = rh)
 #
 # References: Pearson 1900 

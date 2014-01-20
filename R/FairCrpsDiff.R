@@ -1,33 +1,33 @@
 ################################
 #
 # ANALYZE DIFFERENCE IN THE FAIR CRPS BETWEEN TWO ENSEMBLE
-# FORECASTING SYSTEMS FOR THE SAME VERIFICATION
+# FORECASTING SYSTEMS FOR THE SAME OBSERVATIONS
 #
 # ens     ... the ensemble (matrix of dimension N*K)
 # ens.ref ... the reference ensemble (matrix of dimension N*K.ref)
-# ver     ... verifications (vector of length N)
+# obs     ... observations (vector of length N)
 # probs   ... quantiles of the sampling distribution
 #
 ################################
-FairCrpsDiff <- function(ens, ens.ref, ver, probs=NA) {
+FairCrpsDiff <- function(ens, ens.ref, obs, probs=NA) {
 
   # sanity checks
-  stopifnot(is.numeric(c(ens, ens.ref, ver)))
-  stopifnot(is.vector(ver), length(ver) > 1)
+  stopifnot(is.numeric(c(ens, ens.ref, obs)))
+  stopifnot(is.vector(obs), length(obs) > 1)
   stopifnot(is.matrix(ens), is.matrix(ens.ref))
-  stopifnot(nrow(ens)==length(ver), nrow(ens.ref) == length(ver))
+  stopifnot(nrow(ens)==length(obs), nrow(ens.ref) == length(obs))
 
-  N <- length(ver)
+  N <- length(obs)
   K <- ncol(ens)
   K.ref <- ncol(ens.ref)
-  ver <- matrix(ver, ncol=1)
+  obs <- matrix(obs, ncol=1)
 
   K <- ncol(ens)
   K.ref <- ncol(ens.ref)
 
   # calculate fair crps difference
-  crps.ens <- FairCrps(ens, ver)
-  crps.ref <- FairCrps(ens.ref, ver)
+  crps.ens <- FairCrps(ens, obs)
+  crps.ref <- FairCrps(ens.ref, obs)
   crps.diff <- crps.ref - crps.ens
   mean.crps.diff <- mean(crps.diff)
 
