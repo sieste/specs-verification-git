@@ -2,17 +2,18 @@ BrierDecomposition <- function(p, ver, calibration=list(method="bin", bins=10)) 
 
   # estimate calibration function P(y=1|p)
   if (calibration[["method"]] == "bin") {
-    # estimate P(y=1|p) by NumberOf(y=1 & p in bin i) / NumberOf(p in bin i)
+    # estimate P(y=1|p) by NumberOf(y=1 and p in bin i) / NumberOf(p in bin i)
     bins <- calibration[["bins"]]
     # define number of bins and bin breaks
+    stopifnot(length(bins) > 0)
     if (length(bins) == 1) {
       nbins <- bins
       brx <- seq(0, 1, length.out = nbins + 1)
     } else {
-      stopifnot(bins[1] == 0, bins[length(bins)] == 1)
+      stopifnot(bins[1] <= 0, bins[length(bins)] >= 1)
       nbins <- length(bins) - 1
       brx <- bins
-    }
+    } 
     # estimate conditional event frequency
     p.hist <- hist(x=p, breaks=brx, plot=FALSE)$counts
     cond.counts <- hist(x=p[ver==1], breaks=brx, plot=FALSE)$counts
