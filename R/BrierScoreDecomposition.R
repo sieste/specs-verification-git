@@ -10,7 +10,9 @@ BrierDecomposition <- function(p, y, calibration=list(method="bin", bins=10)) {
       nbins <- bins
       brx <- seq(0, 1, length.out = nbins + 1)
     } else {
-      stopifnot(bins[1] <= 0, bins[length(bins)] >= 1)
+      bins = sort(bins)
+      stopifnot(bins[1] <= 0, bins[length(bins)] >= 1, 
+                all(bins >= 0), all(bins <=1))
       nbins <- length(bins) - 1
       brx <- bins
     } 
