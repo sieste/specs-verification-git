@@ -89,6 +89,12 @@ function(probs, ver, bins=10, nboot=500,
   stopifnot(nboot >= 0, mc.cores >= 0)
   stopifnot(all(probs >= 0), all(probs <= 1), all(ver %in% c(0,1)))
   stopifnot(length(cons.probs) == 2, all(cons.probs >= 0), all(cons.probs <= 1))
+  stopifnot(require(multicore) & mc.cores==1)
+  if(require(multicore)) {
+    mclapply <- multicore::mclapply
+  } else {
+    mclapply <- NULL
+  }
 
   # some definitions and corrections
   n <- length(ver)
