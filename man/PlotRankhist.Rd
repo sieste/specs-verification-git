@@ -5,10 +5,10 @@
   Plots a rank histogram in different modes.
 }
 \usage{
-PlotRankhist(rh, mode="raw")
+PlotRankhist(rank.hist, mode="raw")
 }
 \arguments{
-  \item{rh}{A vector or rank counts.}
+  \item{rank.hist}{A vector or rank counts.}
   \item{mode}{string. One of "raw" (default) or "prob.paper". Whether to draw the raw rank histogram, or the rank histogram on probability paper. See Details.}
 }
 \value{
@@ -17,16 +17,16 @@ PlotRankhist(rh, mode="raw")
 \details{
 The plotting modes currently implemented are:
 
-"raw" (default): A simple bar plot of the counts provided by the `rh` argument.
+"raw" (default): A simple bar plot of the counts provided by the `rank.hist` argument.
 
-"prob.paper": The individual counts given by `rh` are transformed to their cumulative probabilities under the binomial distribution with parameters `N` and `1/K`, where `N=sum(rh)` and `K=length(rh)`. This transformation makes possible an assessment of the observed rank counts under the hypothesis of equally likely ranks. The y-axis on the left indicates the cumulative probabilities. The intervals on the right of the plot indicate central 90, 95, and 99 percent _simultaneous_ confidence intervals. That is, if all ranks were equally likely on average, approximately 90 percent of all rank histograms would be _completely_ contained in the 90 percent interval and approximately 10 percent of all rank histograms would have _at least_ one bar that falls outside this interval.
+"prob.paper": The individual counts given by `rank.hist` are transformed to their cumulative probabilities under the binomial distribution with parameters `N` and `1/K`, where `N=sum(rank.hist)` and `K=length(rank.hist)`. This transformation makes possible an assessment of the observed rank counts under the hypothesis of equally likely ranks. The y-axis on the left indicates the cumulative probabilities. The intervals on the right of the plot indicate central 90, 95, and 99 percent _simultaneous_ confidence intervals. That is, if all ranks were equally likely on average, approximately 90 percent of all rank histograms would be _completely_ contained in the 90 percent interval and approximately 10 percent of all rank histograms would have _at least_ one bar that falls outside this interval.
 }
 \examples{
   # Example:
   ens <- matrix(rnorm(500),100,5)
   obs <- rnorm(100)
-  rh <- Rankhist(ens, obs)
-  PlotRankhist(rh, mode="prob.paper")
+  rank.hist <- Rankhist(ens, obs)
+  PlotRankhist(rank.hist, mode="prob.paper")
 }
 
 \references{
