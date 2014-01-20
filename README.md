@@ -26,7 +26,8 @@ To **load** the package from the library directory `/tmp`, and list all its func
 
 ### Changelog
 
-* 2014-01-19: `BrierScoreDecomposition`: wrote documentation, fixed some bugs
+* 2014-01-19: `BrierScoreDecomposition`: added documentation, fixed some bugs
+* 2014-01-14: `PlotRankhist`: added documentation
 * 2014-01-13: removed GSL dependency 
 * 2014-01-09: added and documented `GetDensity` function for dressed ensembles
 * 2014-01-09: added and documented `PlotDressedEns` function
