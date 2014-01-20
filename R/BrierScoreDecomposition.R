@@ -1,4 +1,4 @@
-BrierDecomposition <- function(p, ver, calibration=list(method="bin", bins=10)) {
+BrierDecomposition <- function(p, y, calibration=list(method="bin", bins=10)) {
 
   # estimate calibration function P(y=1|p)
   if (calibration[["method"]] == "bin") {
@@ -16,7 +16,7 @@ BrierDecomposition <- function(p, ver, calibration=list(method="bin", bins=10)) 
     } 
     # estimate conditional event frequency
     p.hist <- hist(x=p, breaks=brx, plot=FALSE)$counts
-    cond.counts <- hist(x=p[ver==1], breaks=brx, plot=FALSE)$counts
+    cond.counts <- hist(x=p[y==1], breaks=brx, plot=FALSE)$counts
     cond.freq <- cond.counts / p.hist
 
     # match p and P(y=1|p)
@@ -37,6 +37,5 @@ BrierDecomposition <- function(p, ver, calibration=list(method="bin", bins=10)) 
 
   # return the decomposition
   c(REL=REL, RES=RES, UNC=UNC)
-
 }
 
