@@ -11,7 +11,7 @@ function(probs, obs, bins=10, nboot=500,
   #
   # Plot reliability diagram for a probability forecast
   #
-  # Usage: rel.diag(probs, obs, nbins, nboot)
+  # Usage: ReliabilityDiagram(probs, obs, nbins, nboot)
   #
   # Arguments:
   #
@@ -89,12 +89,15 @@ function(probs, obs, bins=10, nboot=500,
   stopifnot(nboot >= 0, mc.cores >= 0)
   stopifnot(all(probs >= 0), all(probs <= 1), all(obs %in% c(0,1)))
   stopifnot(length(cons.probs) == 2, all(cons.probs >= 0), all(cons.probs <= 1))
-  stopifnot(require(multicore) & mc.cores==1)
+  # optional use of multicore without warning message
+  warn <- getOption("warn")
+  options(warn=-1)
   if(require(multicore)) {
     mclapply <- multicore::mclapply
   } else {
-    mclapply <- NULL
+    mclapply <- function(..., mc.cores) lapply(...)
   }
+  options(warn=warn)
 
   # some definitions and corrections
   n <- length(obs)
@@ -110,9 +113,11 @@ function(probs, obs, bins=10, nboot=500,
   if (length(bins) == 1) {
     nbins <- floor(bins)
     brx <- seq(0, 1, length.out=nbins+1) + 
-         c(-.Machine$double.eps, rep(0, nbins-1), .Machine$double.eps)
+         c(-.1, rep(0, nbins-1), .1)
   } else {
     nbins <- length(bins) - 1
+    bins <- sort(bins)
+    stopifnot(min(bins)<= 0 & max(bins) >= 1)
     brx <- bins
   }
   h <- hist(probs, breaks=brx, plot=FALSE)$counts        
@@ -145,7 +150,6 @@ function(probs, obs, bins=10, nboot=500,
     }
     # multicore?
     if (mc.cores > 1) { 
-      stopifnot(require(multicore))
       l <- mclapply(1:nboot, sample.rel.diag, mc.cores=mc.cores)
       resamp.mat <- do.call(rbind, l)
     } else {
