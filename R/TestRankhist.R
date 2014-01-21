@@ -3,14 +3,14 @@
 # RANK HISTOGRAM SIGNIFICANCE TESTS #
 #                                   #
 #####################################
-RankhistTests <- function(rank.hist) {
+TestRankhist <- function(rank.hist) {
 #
 # Conduct a series of significance tests for flatness of the rank histogram
 #
-# Usage: rankhist.tests(rank.hist=rh)
+# Usage: TestRankhist(rank.hist=rh)
 #
 # Arguments:
-#   * rank.hist ... a vector of rank counts (see function `rankhist()`
+#   * rank.hist ... a vector of rank counts (see function `rankhist())`
 #
 # Return value:
 #   * a dataframe with:
