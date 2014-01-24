@@ -92,7 +92,7 @@ function(probs, obs, bins=10, nboot=500,
   # optional use of multicore without warning message
   warn <- getOption("warn")
   options(warn=-1)
-  if(require(multicore)) {
+  if(require(multicore, quietly=TRUE)) {
     mclapply <- multicore::mclapply
   } else {
     mclapply <- function(..., mc.cores) lapply(...)
@@ -128,7 +128,7 @@ function(probs, obs, bins=10, nboot=500,
   obar.i[ is.nan(obar.i) ] <- NA
   
   # calculate in-bin averages
-  p.bins <- as.numeric(cut(probs, breaks=brx))
+  p.bins <- as.numeric(cut(probs, breaks=brx, include.lowest=TRUE))
   p.avgs <- sapply(seq(nbins), 
                    function(ii) mean(probs[p.bins == ii], na.rm=TRUE))
   p.avgs[ is.nan(p.avgs) ] <- NA
