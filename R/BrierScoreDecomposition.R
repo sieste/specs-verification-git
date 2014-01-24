@@ -1,6 +1,9 @@
 BrierScoreDecomposition <- function(p, y, calibration=list(method="bin", bins=10)) {
 
-  stopifnot(all(p >= 0), all(p <= 1), all(y==0 | y==1))
+  stopifnot(all(p >= 0), 
+            all(p <= 1), 
+            all(y==0 | y==1),
+            "method" %in% names(calibration))
 
   # estimate calibration function P(y=1|p)
   if (calibration[["method"]] == "bin") {
@@ -28,7 +31,10 @@ BrierScoreDecomposition <- function(p, y, calibration=list(method="bin", bins=10
     cal <- cond.freq[ p.bin ]
   } else if (calibration[["method"]] == "logistic") {
     # estimate P(y=1|p) by a logistic regression model 
+    w <- getOption("warn")
+    options(warn=-1)
     cal <- glm(y~p, family="binomial")$fitted
+    options(warn=w)
   } else {
     stop(paste("unknown calibration method:", calibration[["method"]]))
   }
