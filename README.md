@@ -26,6 +26,7 @@ To **load** the package from the library directory `/tmp`, and list all its func
 
 ### Changelog
 
+* 2014-01-27: added user guide
 * 2014-01-20: added lots of documentation, fixed optional dependency on `multicore`, renamed `RankhistTests` to `TestRankhist`
 * 2014-01-19: major cleanup
 * 2014-01-19: `FairBrier`: added documentation
