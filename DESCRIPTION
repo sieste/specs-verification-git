@@ -10,4 +10,3 @@ Depends:
 Description: A collection of new forecast verification for the SPECS FP7 project. The emphasis is on comparative verification of ensemble forecasts.
 Suggests: multicore
 License: GPL (>= 2)
-

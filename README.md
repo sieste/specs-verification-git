@@ -27,7 +27,7 @@ To **load** the package from the library directory `/tmp`, and list all its func
 ### Changelog
 
 
-* 2014-01-27: Version 0.0-2 ready for testing
+* 2014-01-27: **Version 0.0-2** ready for testing
 * 2014-01-27: added user guide
 * 2014-01-20: added lots of documentation, fixed optional dependency on `multicore`, renamed `RankhistTests` to `TestRankhist`
 * 2014-01-19: major cleanup
@@ -37,4 +37,4 @@ To **load** the package from the library directory `/tmp`, and list all its func
 * 2014-01-13: removed GSL dependency 
 * 2014-01-09: added and documented `GetDensity` function for dressed ensembles
 * 2014-01-09: added and documented `PlotDressedEns` function
-* 2014-01-08: Version 0.0-1 ready for testing
+* 2014-01-08: **Version 0.0-1** ready for testing
