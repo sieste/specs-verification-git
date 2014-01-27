@@ -1,6 +1,6 @@
 % The **SpecsVerification** package user guide
 % Stefan Siegert
-% January 2014
+% Version: January 2014
 
 
 ```{r, echo=FALSE}
