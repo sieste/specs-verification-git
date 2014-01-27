@@ -58,13 +58,13 @@ PlotRankhist <- function(rank.hist, mode="raw") {
     # prepare for plotting
     offs <- 8
     bar.wd <- 0.9
-    par(oma=c(0, 0, 0, 3), cex.lab=0.8, cex.axis=0.8)
+    par(oma=c(0, 0, 0, 4), cex.lab=0.8, cex.axis=0.8)
     plot(NULL, xlim=c(0,K+2), ylim=c(0,2*offs), axes=F, xlab="rank i", ylab=expression(nu[i]))
     b <- barplot(lornuh + offs, add=T, axes=FALSE, width=bar.wd, col=gray(0.5))
     points(b[i.clip.min], lornuh[i.clip.min]+offs, pch=25, bg="black", cex=.6)
     points(b[i.clip.max], lornuh[i.clip.max]+offs, pch=24, bg="black", cex=.6)
     # axis labels
-    xlabels <- matrix(t(cbind(paste(seq(1,K+1,2)),"")),nrow=1)[1:(K+1)]
+    xlabels <- paste(1:(K+1))
     axis(1, at=b, labels=xlabels)
     pvals <- c(0.001,0.01,0.1,0.5,0.9,0.99,0.999)
     yvals <- log(pvals/(1-pvals))
