@@ -1,6 +1,6 @@
 Package: SpecsVerification
-Version: 0.0-1
-Date: 2014-01-07
+Version: 0.0-2
+Date: 2014-01-27
 Title: Forecast verification routines for the SPECS FP7 project
 Authors@R: c(person("Stefan", "Siegert", role = c("aut", "cre"),
                      email = "s.siegert@exeter.ac.uk"))
@@ -10,4 +10,3 @@ Depends:
 Description: A collection of new forecast verification for the SPECS FP7 project. The emphasis is on comparative verification of ensemble forecasts.
 Suggests: multicore
 License: GPL (>= 2)
-
