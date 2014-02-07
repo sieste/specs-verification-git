@@ -22,8 +22,10 @@ BrierScoreDecomposition <- function(p, y, calibration=list(method="bin", bins=10
       brx <- bins
     } 
     # estimate conditional event frequency
-    p.hist <- hist(x=p, breaks=brx, plot=FALSE)$counts
-    cond.counts <- hist(x=p[y==1], breaks=brx, plot=FALSE)$counts
+    p.hist <- hist(x=p, breaks=brx, plot=FALSE, 
+                   include.lowest=TRUE)$counts
+    cond.counts <- hist(x=p[y==1], breaks=brx, plot=FALSE,
+                        include.lowest=TRUE)$counts
     cond.freq <- cond.counts / p.hist
 
     # match p and P(y=1|p)
