@@ -27,6 +27,7 @@ To **load** the package from the library directory `/tmp`, and list all its func
 ### Changelog
 
 
+* 2014-04-09: added and documented `FairRps` and `FairRpsDiff`: Fair ranked probability score for categorical ensemble forecasts
 * 2014-02-07: added `integrated` option to `GetDensity()` function
 * 2014-01-27: **Version 0.0-2** ready for testing
 * 2014-01-27: added user guide
