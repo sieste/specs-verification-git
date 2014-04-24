@@ -1,6 +1,6 @@
 % The **SpecsVerification** package user guide
 % Stefan Siegert
-% Version: January 2014
+% Version: April 2014
 
 
 ```{r, echo=FALSE}
@@ -79,7 +79,7 @@ lines(fbr.l00w, type="b", pch=16, col="black")
 print(c(mean(fbr.ecmwf), mean(fbr.l00w)))
 ```
 
-The function `AnalyzeFairBrier` returns the mean fair Brier score difference and optional estimated quantiles of the sampling distribution of the mean difference:
+The function `FairBrierDiff` returns the mean fair Brier score difference and optional estimated quantiles of the sampling distribution of the mean difference:
 
 ```{r}
 FairBrierDiff(ens=l00w, ens.ref=ecmwf, obs=ver, 

@@ -1,6 +1,6 @@
 % The **SpecsVerification** package user guide
 % Stefan Siegert
-% Version: January 2014
+% Version: April 2014
 
 
 
@@ -138,7 +138,7 @@ R output >>  [1] 0.15574 0.03529
 ```
 
 
-The function `AnalyzeFairBrier` returns the mean fair Brier score difference and optional estimated quantiles of the sampling distribution of the mean difference:
+The function `FairBrierDiff` returns the mean fair Brier score difference and optional estimated quantiles of the sampling distribution of the mean difference:
 
 
 ```r
@@ -249,9 +249,9 @@ print(rd)
 
 ```
 R output >>     p.avgs cond.probs cbar.lo cbar.hi
-R output >>  1 0.02105    0.05263    0.00  0.1111
-R output >>  2 0.60000    1.00000    0.00  1.0000
-R output >>  3 0.93333    1.00000    0.75  1.0000
+R output >>  1 0.02105    0.05263  0.0000  0.1053
+R output >>  2 0.60000    1.00000  0.0000  1.0000
+R output >>  3 0.93333    1.00000  0.7273  1.0000
 ```
 
 
