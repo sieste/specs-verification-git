@@ -33,9 +33,16 @@ Rankhist <- function(ens, obs) {
 #   Hammill (2001) http://dx.doi.org/10.1175/1520-0493(2001)129%3C0550:IORHFV%3E2.0.CO;2
 #
 #
+
+  if (class(ens) == "data.frame") {
+    ens <- as.matrix(ens)
+  }
+  if (class(obs) == "data.frame") {
+    obs <- c(as.matrix(obs))
+  }
+  stopifnot(nrow(ens) == length(obs))
   N <- dim(ens)[1]
   K <- dim(ens)[2]
-  stopifnot(N == length(obs))
   ranks <- apply(cbind(obs, ens), 1, rank, ties.method="random")[1, ]
   rank.hist <- hist(ranks, breaks=seq(0.5, K+1.5, 1), plot=FALSE)$counts
   return(rank.hist)

@@ -1,9 +1,13 @@
 BrierScoreDecomposition <- function(p, y, calibration=list(method="bin", bins=10)) {
 
+  p <- as.vector(p)
+  y <- as.vector(y)
+
   stopifnot(all(p >= 0), 
             all(p <= 1), 
             all(y==0 | y==1),
-            "method" %in% names(calibration))
+            "method" %in% names(calibration),
+            length(y) == length(p))
 
   # estimate calibration function P(y=1|p)
   if (calibration[["method"]] == "bin") {

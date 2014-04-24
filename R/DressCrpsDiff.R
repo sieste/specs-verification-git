@@ -12,6 +12,9 @@
 DressCrpsDiff <- function(dressed.ens, dressed.ens.ref, obs, probs=NA) {
 
   # sanity checks
+  if (class(obs) == "data.frame") {
+    obs <- c(as.matrix(obs))
+  }
   stopifnot(class(dressed.ens)=="dressed.ens", 
             class(dressed.ens.ref)=="dressed.ens")
   stopifnot(is.vector(obs), length(obs) > 1)

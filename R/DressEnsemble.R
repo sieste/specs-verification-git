@@ -2,6 +2,10 @@ DressEnsemble <- function(ens, dressing.method="silverman",
                           parameters=NA) 
 {
 
+  if (class(ens) == "data.frame") {
+    ens <- as.matrix(ens)
+  }
+
   # silverman's rule of thumb
   if (dressing.method == "silverman") {
     n.members <- rowSums(!is.na(ens))

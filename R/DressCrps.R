@@ -1,5 +1,10 @@
 # return a vector of crps for dressed ensembles
 DressCrps <- function(dressed.ens, obs) {
+
+  if (class(obs) == "data.frame") {
+    obs <- c(as.matrix(obs))
+  }
+
   N <- nrow(dressed.ens[["ens"]])
   K.vec <- rowSums(!is.na(dressed.ens[["ens"]]))
 

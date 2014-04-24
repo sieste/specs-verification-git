@@ -13,6 +13,14 @@
 #
 ################################
 FairCrps <- function(ens, obs) {
+
+  if (class(ens) == "data.frame") {
+    ens <- as.matrix(ens)
+  }
+  if (class(obs) == "data.frame") {
+    obs <- as.matrix(obs)
+  }
+
   obs <- as.vector(obs)
   if (length(obs) == 1) {
   # single instance

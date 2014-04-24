@@ -4,9 +4,9 @@ DressIgn <- function(dressed.ens, obs) {
 
   ign <- with(dressed.ens, {
     sapply(1:N, function(ii) {
-      s <- ker.wd[ii, ]
-      e <- ens[ii, ]
-      o <- obs[ii]
+      s <- as.numeric(ker.wd[ii, ])
+      e <- as.numeric(ens[ii, ])
+      o <- as.numeric(obs[ii])
       -log2(mean(dnorm(o, e, s), na.rm=TRUE))
     })
   })

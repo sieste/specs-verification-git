@@ -85,6 +85,12 @@ function(probs, obs, bins=10, nboot=500,
 
 
   # sanity checks
+  if (class(probs) == "data.frame") {
+    probs <- c(as.matrix(probs))
+  }
+  if (class(obs) == "data.frame") {
+    obs <- c(as.matrix(obs))
+  }
   stopifnot(length(probs) == length(obs))
   stopifnot(nboot >= 0, mc.cores >= 0)
   stopifnot(all(probs >= 0), all(probs <= 1), all(obs %in% c(0,1)))

@@ -1,6 +1,9 @@
 # return ensemble density at a matrix of x values
 GetDensity <- function(dressed.ens, x, integrated=FALSE) {
 
+  if (class(x) == "data.frame") {
+    x <- as.matrix(x)
+  }
   if (dressed.ens[["ker.type"]] == "gauss") {
     if (integrated) {
       kernel.fun <- pnorm
