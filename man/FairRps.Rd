@@ -5,7 +5,7 @@
 Calculate the Fair Ranked Probability Score for ensemble forecasts and their corresponding observations
 }
 \usage{
-FairBrier(ens, obs)
+FairRps(ens, obs)
 }
 \arguments{
   \item{ens}{N*K matrix. ens[i,j] is the number of ensemble members that predict category j at time i.}

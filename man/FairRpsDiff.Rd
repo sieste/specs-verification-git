@@ -27,6 +27,6 @@ A list with the following elements:
   ens <- matrix(c(1,2,3, 1,3,2), byrow=TRUE, nrow=2)
   ens.ref <- matrix(c(2,2,2, 2,2,2), byrow=TRUE, nrow=2)
   obs <- matrix(c(0,0,1, 0,1,0), byrow=TRUE, nrow=2)
-  FairRpsDiff(ens,obs)
+  FairRpsDiff(ens, ens.ref, obs, probs=c(0.025, 0.975))
 }
 
