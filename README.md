@@ -27,6 +27,7 @@ To **load** the package from the library directory `/tmp`, and list all its func
 ### Changelog
 
 
+* 2014-04-30: added and documented functions `GaussCRPS`, `GaussCrpsDiff` and `GaussCrpsDecomposition`: Continuously ranked probability score for probability forecasts issued as Gaussian distributions
 * 2014-04-24: adjusted all functions to handle `data.frame`s (thanks, David!)
 * 2014-04-11: fixed a bug in the `FitAkdParameters` routine (thanks, David!)
 * 2014-04-09: added and documented `FairRps` and `FairRpsDiff`: Fair ranked probability score for categorical ensemble forecasts
