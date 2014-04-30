@@ -2,7 +2,7 @@
 \alias{FairRpsDiff}
 \title{Calculate average score differences for competing ensemble forecasts.}
 \description{
-  Calculate the average fair ranked probability score (fair RPS) difference between two competing ensemble forecasts for the same observation. Approximate sampling quantiles of the average score difference are provided.
+  Calculate the average fair ranked probability score (fair RPS) difference between two competing ensemble forecasts for the same observation. Approximate sampling quantiles of the average score difference are provided. The difference between the score of `ens.ref` and `ens` is calculated. The higher the score difference, the higher the improvement of `ens` over `ens.ref`.
 }
 \usage{
 FairRpsDiff(ens, ens.ref, obs, probs)

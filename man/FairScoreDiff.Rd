@@ -3,7 +3,7 @@
 \alias{FairBrierDiff}
 \title{Calculate average score differences for competing ensemble forecasts.}
 \description{
-  Calculate the average fair continuously ranked probability score (fair CRPS) difference or average fair Brier score difference between two competing ensemble forecasts for the same observation. Approximate sampling quantiles of the average score difference are provided.
+  Calculate the average fair continuously ranked probability score (fair CRPS) difference or average fair Brier score difference between two competing ensemble forecasts for the same observation. Approximate sampling quantiles of the average score difference are provided. The score difference between `ens.ref` and `ens` is calculated. The higher the score difference, the higher the improvement of `ens` over `ens.ref`.
 }
 \usage{
 FairCrpsDiff(ens, ens.ref, obs, probs)

@@ -3,7 +3,7 @@
 \alias{DressIgnDiff}
 \title{Calculate average score differences for competing dressed ensemble forecasts.}
 \description{
-  Calculate the average continuously ranked probability score (CRPS) difference or average Ignorance score difference between a collection of forecast distributions generated from two competing ensemble forecasts dressed with Gaussian kernels. Approximate sampling quantiles of the average score difference are provided.
+  Calculate the average continuously ranked probability score (CRPS) difference or average Ignorance score difference between a collection of forecast distributions generated from two competing ensemble forecasts dressed with Gaussian kernels. Approximate sampling quantiles of the average score difference are provided. The difference between the reference forecast `dressed.ens.ref` and the forecast `dressed.ens` is calculated. The higher the score difference, the higher the improvement of `dressed.ens` over `dressed.ens.ref`.
 }
 \usage{
 DressCrpsDiff(dressed.ens, dressed.ens.ref, obs, probs)

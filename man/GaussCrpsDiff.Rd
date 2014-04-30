@@ -2,7 +2,7 @@
 \alias{GaussCrpsDiff}
 \title{Calculate average score differences for competing probabilistic forecasts.}
 \description{
- Calculate the average continuously ranked probability score (CRPS) difference between two competing probabilistic forecasts issued as Gaussian distributions for the same observation. Approximate sampling quantiles of the average score difference are provided.
+ Calculate the average continuously ranked probability score (CRPS) difference between two competing probabilistic forecasts issued as Gaussian distributions for the same observation. Approximate sampling quantiles of the average score difference are provided. The difference between the reference forecast (mean.ref, sd.ref) and the forecast (mean, sd) is calculated. The higher the score difference, the higher the improvement of (mean, sd) over (mean.ref, sd.ref).
 }
 \usage{
 GaussCrpsDiff(mean, sd, mean.ref, sd.ref, obs, probs)
