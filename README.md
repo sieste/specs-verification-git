@@ -27,6 +27,7 @@ To **load** the package from the library directory `/tmp`, and list all its func
 ### Changelog
 
 
+* 2014-05-01: removed dependency on package `multicore` to meet CRAN standards
 * 2014-04-30: specified which score difference are calculated in the documentation of the `*Diff` functions.
 * 2014-04-30: added and documented functions `GaussCRPS`, `GaussCrpsDiff` and `GaussCrpsDecomposition`: Continuously ranked probability score for probability forecasts issued as Gaussian distributions
 * 2014-04-24: adjusted all functions to handle `data.frame`s (thanks, David!)
