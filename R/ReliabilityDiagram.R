@@ -5,7 +5,7 @@
 ######################################################################
 ReliabilityDiagram <- 
 function(probs, obs, bins=10, nboot=500, 
-         plot=FALSE, plot.refin=TRUE, mc.cores=1, 
+         plot=FALSE, plot.refin=TRUE, 
          cons.probs=c(0.025, 0.975)) 
 {
   #
@@ -30,8 +30,6 @@ function(probs, obs, bins=10, nboot=500,
   #    plot.refin ... boolean; whether to plot the small refinement histogram
   #                   in lower right corner
   #    cons.probs ... a 2-vector, lower and upper confidence limit
-  #    mc.cores ... number of cores for resampling (if > 1, library `multicore`
-  #                 is required)
   #
   # Return value:
   #
@@ -58,6 +56,9 @@ function(probs, obs, bins=10, nboot=500,
   #
   #
   # change log:
+  #
+  #  2014/05/01
+  #  * removed multicore dependency to meet CRAN policies
   #
   #  2013/12/02
   #  * manual definition of bin-breaks
@@ -92,25 +93,14 @@ function(probs, obs, bins=10, nboot=500,
     obs <- c(as.matrix(obs))
   }
   stopifnot(length(probs) == length(obs))
-  stopifnot(nboot >= 0, mc.cores >= 0)
+  stopifnot(nboot >= 0)
   stopifnot(all(probs >= 0), all(probs <= 1), all(obs %in% c(0,1)))
   stopifnot(length(cons.probs) == 2, all(cons.probs >= 0), all(cons.probs <= 1))
-  # optional use of multicore without warning message
-  warn <- getOption("warn")
-  options(warn=-1)
-  if(require(multicore, quietly=TRUE)) {
-    mclapply <- multicore::mclapply
-  } else {
-    mclapply <- function(..., mc.cores) lapply(...)
-  }
-  options(warn=warn)
 
   # some definitions and corrections
   n <- length(obs)
-  mc.cores <- floor(mc.cores)
   nboot <- floor(nboot)
   cons.probs <- sort(cons.probs)
-
 
   #############################################
   # reliability analysis
@@ -154,14 +144,8 @@ function(probs, obs, bins=10, nboot=500,
       gg <- hist(p.hat[x.hat==1], breaks=brx, plot=FALSE)$counts
       return(gg / hh)
     }
-    # multicore?
-    if (mc.cores > 1) { 
-      l <- mclapply(1:nboot, sample.rel.diag, mc.cores=mc.cores)
-      resamp.mat <- do.call(rbind, l)
-    } else {
-      l <- replicate(nboot, sample.rel.diag())
-      resamp.mat <- t(l)
-    }
+    l <- replicate(nboot, sample.rel.diag())
+    resamp.mat <- t(l)
     cons.bars <- apply(resamp.mat, 2, 
                        function(z) quantile(z, cons.probs, na.rm=TRUE))
   } else {
