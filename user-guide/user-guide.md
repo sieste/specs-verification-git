@@ -234,7 +234,7 @@ ver <- obs[,4]
 ver <- ver - mean(ver)
 y <- 1 * (ver > 1)
 rd <- ReliabilityDiagram(probs=p, obs=y, bins=c(0,1/3,2/3,1), 
-                         plot=TRUE, nboot=500, mc.cores=8)
+                         plot=TRUE, nboot=500)
 ```
 
 ![plot of chunk reldiag](figure/reldiag.pdf) 
@@ -249,9 +249,9 @@ print(rd)
 
 ```
 R output >>     p.avgs cond.probs cbar.lo cbar.hi
-R output >>  1 0.02105    0.05263  0.0000  0.1053
+R output >>  1 0.02105    0.05263  0.0000  0.1083
 R output >>  2 0.60000    1.00000  0.0000  1.0000
-R output >>  3 0.93333    1.00000  0.7273  1.0000
+R output >>  3 0.93333    1.00000  0.7692  1.0000
 ```
 
 
