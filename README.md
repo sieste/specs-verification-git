@@ -2,7 +2,18 @@
 
 This is the official repository of forecast verification routines for the SPECS FP7 project.
 
-### Download, install, load
+### Now available on CRAN
+
+As of 2 May 2014, the package `SpecsVerification` is available on the Comprehensive R Archive Network ([CRAN](cran.R-project.org)). This means it can be installed from R by
+
+    install.packages("SpecsVerification")
+
+It is still under development and will see some changes in the future, but the main bugs have been fixed. If you want to get emails if new versions of `SpecsVerification` become available, write an email to `s.siegert (at) exeter (dot) ac (dot) uk`.
+    
+
+### Manual download, install, load
+
+These instructions show you how to install the latest version of the `SpecsVerification` package from github. Modifications will first appear on this repository before they are submitted to CRAN.
 
 **Download** the master branch of this repository to `/tmp`. In the Linux shell, do
 
@@ -27,6 +38,7 @@ To **load** the package from the library directory `/tmp`, and list all its func
 ### Changelog
 
 
+* 2014-05-02: **Version 0.1-1** available on CRAN
 * 2014-04-30: specified which score difference are calculated in the documentation of the `*Diff` functions.
 * 2014-04-30: added and documented functions `GaussCRPS`, `GaussCrpsDiff` and `GaussCrpsDecomposition`: Continuously ranked probability score for probability forecasts issued as Gaussian distributions
 * 2014-04-24: adjusted all functions to handle `data.frame`s (thanks, David!)
