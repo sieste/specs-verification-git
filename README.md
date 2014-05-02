@@ -4,7 +4,7 @@ This is the official repository of forecast verification routines for the SPECS 
 
 ### Now available on CRAN
 
-As of 2 May 2014, the package `SpecsVerification` is available on the Comprehensive R Archive Network ([CRAN](cran.R-project.org)). This means it can be installed from R by
+As of 2 May 2014, the package `SpecsVerification` is available on the Comprehensive R Archive Network ([CRAN](http://cran.R-project.org)). This means it can be installed from R by
 
     install.packages("SpecsVerification")
 
