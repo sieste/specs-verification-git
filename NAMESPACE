@@ -1,5 +1,6 @@
 useDynLib(SpecsVerification)
 export(BrierScoreDecomposition)
+export(ClimEns)
 export(DressCrps)
 export(DressCrpsDiff)
 export(DressCrpss)
