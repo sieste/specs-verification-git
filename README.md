@@ -38,6 +38,7 @@ To **load** the package from the library directory `/tmp`, and list all its func
 ### Changelog
 
 
+* 2014-08-19: implemented and documented CRPSS for dressed ensembles
 * 2014-05-02: **Version 0.1-1** available on CRAN
 * 2014-04-30: specified which score difference are calculated in the documentation of the `*Diff` functions.
 * 2014-04-30: added and documented functions `GaussCRPS`, `GaussCrpsDiff` and `GaussCrpsDecomposition`: Continuously ranked probability score for probability forecasts issued as Gaussian distributions
