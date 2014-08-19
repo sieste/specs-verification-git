@@ -8,7 +8,7 @@
 # obs     ... observations (vector of length N)
 #
 ################################
-FairCrpsDiff <- function(ens, ens.ref, obs) {
+FairCrpss <- function(ens, ens.ref, obs) {
 
   # sanity checks
   if (class(ens) == "data.frame") {

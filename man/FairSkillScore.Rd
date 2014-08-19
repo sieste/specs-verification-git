@@ -28,6 +28,6 @@ A list with the following elements:
   ens.ref <- ens[, 1:3] + 0.2
   obs <- rnorm(20)
   FairBrierSs(ens, ens.ref, tau=1, obs)
-  FairBrierSs(ens, ens.ref, obs)
+  FairCrpss(ens, ens.ref, obs)
 }
 
