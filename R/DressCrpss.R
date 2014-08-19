@@ -34,12 +34,12 @@ DressCrpss <- function(dressed.ens, dressed.ens.ref, obs, probs=NA) {
   # calculate crpss
   crps.ens <- DressCrps(dressed.ens, obs)
   crps.ref <- DressCrps(dressed.ens.ref, obs)
-  crpss <- 1 - mean(crps.ens) / mean(cprs.ref)
+  crpss <- 1 - mean(crps.ens) / mean(crps.ref)
   crpss.sigma <- 1 / sqrt(N) * sqrt( var(crps.ens) / mean(crps.ref)^2 + 
-         var(crps.ref) * mean(cprs.ens)^2 / mean(crps.ref)^4 - 
+         var(crps.ref) * mean(crps.ens)^2 / mean(crps.ref)^4 - 
          2 * cov(crps.ens, crps.ref) * mean(crps.ens) / mean(crps.ref)^3)
 
   #return
-  list(crpss=crpss, cprss.sigma=cprss.sigma)
+  list(crpss=crpss, crpss.sigma=crpss.sigma)
 }
 

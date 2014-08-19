@@ -1,4 +1,5 @@
 \name{DressCrpss}
+\alias{DressCrpss}
 \title{Calculate continous ranked probability skill score (CRPSS), comparing two dressed ensemble forecasts.}
 \description{
   Calculate the average continuous ranked probability skill score (CRPSS) for a collection of forecast distributions generated from two competing ensemble forecasts dressed with Gaussian kernels. The standard deviation of the skill score approximated by propagation of uncertainty is provided. The higher the skill score, the higher is the improvement of `dressed.ens` over `dressed.ens.ref`.
