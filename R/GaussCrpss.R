@@ -58,5 +58,4 @@ GaussCrpss <- function(mean, sd, mean.ref, sd.ref, obs) {
 
 
 
-}
 

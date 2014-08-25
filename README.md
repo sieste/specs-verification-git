@@ -38,6 +38,7 @@ To **load** the package from the library directory `/tmp`, and list all its func
 ### Changelog
 
 
+* 2014-08-25: added bootstrapping option to `GaussCrpsDecomposition` function
 * 2014-08-19: implemented and documented `ClimEns` function to construct climatological ensembles from a vector of observations
 * 2014-08-19: implemented and documented CRPSS and Ignorance skill score for dressed ensembles, Fair Brier Skill score, Fair CRPSS, Fair RPSS, and Gaussian CRPSS
 * 2014-05-02: **Version 0.1-1** available on CRAN
