@@ -13,7 +13,7 @@
 #
 ################################
 
-GaussCrpsDecomposition <- function(mean,sd,obs,probs=NA,n.boot=NULL) {
+GaussCrpsDecomposition <- function(mean,sd,obs,probs=NA,n.boot=0) {
 
   # CRPS divergence function between N(m,s^2) and N(n,t^2)
   # if s=t=0, then |m-n| is returned
