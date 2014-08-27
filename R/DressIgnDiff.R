@@ -47,7 +47,10 @@ DressIgnDiff <- function(dressed.ens, dressed.ens.ref, obs, probs=NA) {
     names(cis) <- paste(probs)
   }
 
+  # p value of paired one-sided t test for positive score difference
+  p.value <- 1-pt(mean.ign.diff / sd(ign.diff) * sqrt(N), df=N-1)
+
   #return
-  list(ign.diff=mean.ign.diff, sampling.quantiles=cis)
+  list(ign.diff=mean.ign.diff, sampling.quantiles=cis, p.value=p.value)
 }
 

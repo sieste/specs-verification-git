@@ -2,7 +2,7 @@
 \alias{FairRpsDiff}
 \title{Calculate average score differences for competing ensemble forecasts.}
 \description{
-  Calculate the average fair ranked probability score (fair RPS) difference between two competing ensemble forecasts for the same observation. Approximate sampling quantiles of the average score difference are provided. The difference between the score of `ens.ref` and `ens` is calculated. The higher the score difference, the higher the improvement of `ens` over `ens.ref`.
+  Calculate the average fair ranked probability score (fair RPS) difference between two competing ensemble forecasts for the same observation. Approximate sampling quantiles of the average score difference and p-value of the paired one-sided t-test are provided. The difference between the score of `ens.ref` and `ens` is calculated. The higher the score difference, the higher the improvement of `ens` over `ens.ref`.
 }
 \usage{
 FairRpsDiff(ens, ens.ref, obs, probs)
@@ -21,6 +21,8 @@ A list with the following elements:
 "sampling.quantiles": The quantiles of the sampling distribution of the average score difference corresponding to the `probs` argument. The sampling quantiles are approximated by a t-distribution as follows:
 
     qt(probs, df=N-1) * sd(score.diff) / sqrt(N) + mean.score.diff
+
+"p.value": p value of the one-sided paired t-test.
 }
 \examples{
   # Example:

@@ -49,7 +49,10 @@ FairRpsDiff <- function(ens, ens.ref, obs, probs=NA) {
     names(cis) <- paste(probs)
   }
 
+  # p value of paired one-sided t test for positive score difference
+  p.value <- 1-pt(mean.rps.diff / sd(rps.diff) * sqrt(N), df=N-1)
+
   #return
-  list(rps.diff=mean.rps.diff, sampling.quantiles=cis)
+  list(rps.diff=mean.rps.diff, sampling.quantiles=cis, p.value=p.value)
 }
 

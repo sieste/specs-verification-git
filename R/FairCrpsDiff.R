@@ -50,7 +50,10 @@ FairCrpsDiff <- function(ens, ens.ref, obs, probs=NA) {
     names(cis) <- paste(probs)
   }
 
+  # p value of paired one-sided t test for positive score difference
+  p.value <- 1-pt(mean.crps.diff / sd(crps.diff) * sqrt(N), df=N-1)
+
   #return
-  list(crps.diff=mean.crps.diff, sampling.quantiles=cis)
+  list(crps.diff=mean.crps.diff, sampling.quantiles=cis, p.value=p.value)
 }
 

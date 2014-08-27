@@ -59,7 +59,10 @@ FairBrierDiff <- function(ens, ens.ref, obs, tau=0.5, probs=NA) {
     names(cis) <- paste(probs)
   }
 
+  # p value of paired one-sided t test for positive score difference
+  p.value <- 1-pt(mean.br.diff / sd(br.diff) * sqrt(N), df=N-1)
+
   #return
-  list(br.diff=mean.br.diff, sampling.quantiles=cis)
+  list(br.diff=mean.br.diff, sampling.quantiles=cis, p.value=p.value)
 }
 
