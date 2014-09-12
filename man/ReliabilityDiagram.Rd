@@ -5,7 +5,7 @@
   Calculate and plot the reliability diagram of a collection of probability forecasts and their corresponding binary observations.
 }
 \usage{
-ReliabilityDiagram(probs, obs, bins, nboot, plot, plot.refin, mc.cores, cons.probs)
+ReliabilityDiagram(probs, obs, bins, nboot, plot, plot.refin, cons.probs)
 }
 \arguments{
   \item{probs}{vector of length N. probs[k] has the predicted probability for the event obs[k]}
@@ -14,7 +14,6 @@ ReliabilityDiagram(probs, obs, bins, nboot, plot, plot.refin, mc.cores, cons.pro
   \item{nboot}{Number of bootstrap resamples for estimating consistency bars. If nboot==0, no resampling is done and NAs are returned as consistency bars. Default: 500}
   \item{plot}{boolean. Whether to plot the reliability diagram. Default: FALSE}
   \item{plot.refin}{boolean. Whether to plot the small refinement histogram in lower right corner. Default: TRUE}
-  \item{mc.cores}{integer. Number of cores to use for resampling. If mc.cores > 1, library `multicore` is required.Default: 1}
   \item{cons.probs}{vector of length 2. Lower and upper probability for the consistency bars. Default: c(0.025, 0.975)}
 }
 \value{
