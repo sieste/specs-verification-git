@@ -5,14 +5,14 @@
   Decomposition of the continuously ranked probability score (CRPS) for Gaussian forecasts into Reliability, Resolution, and Uncertainty.
 }
 \usage{
-  GaussCrpsDecomposition(mean, sd, obs)
+  GaussCrpsDecomposition(mean, sd, obs, probs, n.boot)
 }
 \arguments{
   \item{mean}{vector of length N. The forecast means.}
   \item{sd}{vector of length N. The forecast standard deviations.}
   \item{obs}{vector of length N. The corresponding observations.}
-  \item{n.boot}{number of bootstrap replicates}
   \item{probs}{probability values for which quantiles are to be estimated by the bootstrap}
+  \item{n.boot}{number of bootstrap replicates}
 }
 \value{
 A list with the following elements:

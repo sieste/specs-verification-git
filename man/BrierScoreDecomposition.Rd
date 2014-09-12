@@ -5,14 +5,14 @@
   Decomposition of the empirical Brier Score into its Reliability, Resolution, and Uncertainty component.
 }
 \usage{
-  BrierScoreDecomposition(p, y, calibration)
+  BrierScoreDecomposition(p, y, calibration, probs, n.boot)
 }
 \arguments{
   \item{p}{vector of length N. The forecast probabilities to analyze.}
   \item{y}{vector of length N. The corresponding binary events (0 = no event, 1 = event)}
   \item{calibration}{list. Specifies the method to estimate the calibration function. See Details.}
-  \item{n.boot}{number of bootstrap replicates}
   \item{probs}{probability values for which quantiles are to be estimated by the bootstrap}
+  \item{n.boot}{number of bootstrap replicates}
 }
 \value{
 If `n.boot=0` or `probs=NA`: A 3 element vector containing the components Reliability (REL), Resolution (RES) and Uncertainty (UNC) of the decomposition. See Details.

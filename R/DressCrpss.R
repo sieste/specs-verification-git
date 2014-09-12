@@ -8,7 +8,7 @@
 # obs     ... verifications (vector of length N)
 #
 ################################
-DressCrpss <- function(dressed.ens, dressed.ens.ref, obs, probs=NA) {
+DressCrpss <- function(dressed.ens, dressed.ens.ref, obs) {
 
   # sanity checks
   if (class(obs) == "data.frame") {
