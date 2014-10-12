@@ -1,10 +1,12 @@
 \name{EnsSkillScore}
 \alias{EnsCrpss}
-\title{Calculate continous ranked probability skill score for competing ensemble forecasts.}
+\alias{EnsBrierSs}
+\title{Calculate Brier skill score or continous ranked probability skill score for competing ensemble forecasts.}
 \description{
-  Calculate continuous ranked probability skill score between two competing ensemble forecasts for the same observation. The sampling standard deviation is estimated by propagation of uncertainty. The higher the skill score, the higher the improvement of `ens` over `ens.ref`.
+  Calculate Brier skill score or continuous ranked probability skill score between two competing ensemble forecasts for the same observation. The sampling standard deviation is estimated by propagation of uncertainty. The higher the skill score, the higher the improvement of `ens` over `ens.ref`.
 }
 \usage{
+EnsBrierSs(ens, ens.ref, obs, tau)
 EnsCrpss(ens, ens.ref, obs)
 }
 \arguments{
@@ -16,7 +18,7 @@ EnsCrpss(ens, ens.ref, obs)
 \value{
 A list with the following elements:
 
-"cprss": The value of the skill score, calculated by 1 - score.of.ens / score.of.ens.ref
+"bss" or "cprss": The value of the skill score, calculated by 1 - score.of.ens / score.of.ens.ref
 
 "crpss.sigma": The standard deviation of the skill score approximated by propagation of uncertainty.
 }
@@ -26,5 +28,6 @@ A list with the following elements:
   ens.ref <- ens[, 1:3] + 0.2
   obs <- rnorm(20)
   EnsCrpss(ens, ens.ref, obs)
+  EnsBrierSs(ens, ens.ref, obs, tau=1)
 }
 
