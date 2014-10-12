@@ -38,6 +38,7 @@ To **load** the package from the library directory `/tmp`, and list all its func
 ### Changelog
 
 
+* 2014-10-12: implemented and documented function `EnsCrps` (the ensemble CRPS or "unfair" CRPS), and corresponding score difference, and skill score functions
 * 2014-08-27: added p-value of paired one-sided t-test as a return value to `ScoreDiff` functions
 * 2014-08-25: added bootstrapping option to `GaussCrpsDecomposition` and `BrierScoreDecomposition` functions
 * 2014-08-19: implemented and documented `ClimEns` function to construct climatological ensembles from a vector of observations
