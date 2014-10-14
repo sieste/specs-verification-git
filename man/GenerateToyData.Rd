@@ -5,22 +5,22 @@
 Generate synthetic ensemble and observation data, using a latent variable model. See Details.
 }
 \usage{
-GenerateToyData(N, mu.y, s.s, s.eps, mu.x1, beta1, s.eta1, K1, 
-                mu.x2, beta2, s.eta2, K2) 
+GenerateToyData(N, mu.y, s.s, s.eps, mu.x, beta, s.eta, K, 
+                mu.x.ref, beta.ref, s.eta.ref, K.ref) 
 }
 \arguments{
   \item{N}{number of forecasts and observations}
   \item{mu.y}{expectation value of the observations}
   \item{s.s}{standard deviation of the predictable signal}
   \item{s.eps}{standard deviation of the unpredictable noise}
-  \item{mu.x1}{expectation value of the ensemble}
-  \item{beta1}{weighting parameter of the signal in the ensemble forecasting system}
-  \item{s.eta1}{average spread of the ensemble}
-  \item{K1}{number of members of the ensemble}
-  \item{mu.x2}{expectation value of the reference ensemble}
-  \item{beta2}{weighting parameter of the signal in the reference ensemble forecasting system}
-  \item{s.eta2}{average spread of the reference ensemble}
-  \item{K2}{number of members of the reference ensemble}
+  \item{mu.x}{expectation value of the ensemble}
+  \item{beta}{weighting parameter of the signal in the ensemble forecasting system}
+  \item{s.eta}{average spread of the ensemble}
+  \item{K}{number of members of the ensemble}
+  \item{mu.x.ref}{expectation value of the reference ensemble}
+  \item{beta.ref}{weighting parameter of the signal in the reference ensemble forecasting system}
+  \item{s.eta.ref}{average spread of the reference ensemble}
+  \item{K.ref}{number of members of the reference ensemble}
 }
 \value{
   A list with elements:
