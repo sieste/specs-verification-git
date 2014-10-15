@@ -38,6 +38,7 @@ To **load** the package from the library directory `/tmp`, and list all its func
 ### Changelog
 
 
+* 2014-10-15: added `reduce.bins` option to `Rankhist` function
 * 2014-10-13: implemented and documented `Detrend` function
 * 2014-10-13: implemented and documented `GenerateToyData` function
 * 2014-10-12: implemented and documented functions `EnsCrps`, `EnsRps`, and `EnsBrier` (the "unfair" scores), and corresponding score difference, and skill score functions
