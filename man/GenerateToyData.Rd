@@ -5,8 +5,9 @@
 Generate synthetic ensemble and observation data, using a latent variable model. See Details.
 }
 \usage{
-GenerateToyData(N, mu.y, s.s, s.eps, mu.x, beta, s.eta, K, 
-                mu.x.ref, beta.ref, s.eta.ref, K.ref) 
+GenerateToyData(N = 20, mu.y = 0, s.s = 7, s.eps = 6, 
+mu.x = 0, beta = 0.2, s.eta = 8, K = 10, 
+mu.x.ref = NA, beta.ref = NA, s.eta.ref = NA, K.ref = NA)
 }
 \arguments{
   \item{N}{number of forecasts and observations}
@@ -38,7 +39,7 @@ GenerateToyData(N, mu.y, s.s, s.eps, mu.x, beta, s.eta, K,
 
     x_t,r = mu_x + beta * s_t + eta_t,r
 
-where y_t is the observation at time t, and x_t,r is the r-th ensemble member at time t. The latent variable s_t is to be understood as the "predictable signal" that is generates correlation between observations and ensemble members. 
+where y_t is the observation at time t, and x_t,r is the r-th ensemble member at time t. The latent variable s_t is to be understood as the "predictable signal" that is generates correlation between observations and ensemble members. If all arguments that end in ".ref" are specified, a reference ensemble is returned.
 }
 \examples{
   l <- GenerateToyData()
