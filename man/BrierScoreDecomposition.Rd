@@ -5,7 +5,8 @@
   Decomposition of the empirical Brier Score into its Reliability, Resolution, and Uncertainty component.
 }
 \usage{
-  BrierScoreDecomposition(p, y, calibration, probs, n.boot)
+BrierScoreDecomposition(p, y, calibration=list(method="bin", bins=10),
+probs=NA, n.boot=0)
 }
 \arguments{
   \item{p}{vector of length N. The forecast probabilities to analyze.}
