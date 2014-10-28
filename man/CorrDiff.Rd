@@ -5,7 +5,7 @@
   Calculate the difference of the correlation coefficients of two competing ensemble forecasts for the same observation. Confidence intervals and a p value of a one-sided test for equality are calculated to evaluate the difference. 
 }
 \usage{
-CorrDiff(ens, ens.ref, obs, sign.level="0.05")
+CorrDiff(ens, ens.ref, obs, sign.level=0.05)
 }
 \arguments{
   \item{ens}{N*K matrix. A collection of N ensemble forecasts, each with K members.}
