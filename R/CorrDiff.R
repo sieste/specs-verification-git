@@ -11,20 +11,15 @@
 ################################
 CorrDiff <- function(ens, ens.ref, obs, sign.level=0.05) {
 
+  # preprocess
+  l <- Preprocess(ens=ens, ens.ref=ens.ref, obs=obs)
+  ens <- l[["ens"]]
+  ens.ref <- l[["ens.ref"]]
+  obs <- l[["obs"]]
+
   # sanity checks
-  if (class(ens) == "data.frame") {
-    ens <- as.matrix(ens)
-  }
-  if (class(ens.ref) == "data.frame") {
-    ens.ref <- as.matrix(ens.ref)
-  }
-  if (class(obs) == "data.frame") {
-    obs <- c(as.matrix(obs))
-  }
   stopifnot(is.numeric(c(ens, ens.ref, obs)))
   stopifnot(is.vector(obs), length(obs) > 1)
-  stopifnot(is.matrix(ens), is.matrix(ens.ref))
-  stopifnot(nrow(ens)==length(obs), nrow(ens.ref) == length(obs))
 
   N <- length(obs)
 

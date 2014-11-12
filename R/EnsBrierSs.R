@@ -18,23 +18,15 @@
 ################################
 EnsBrierSs <- function(ens, ens.ref, obs, tau=0.5) {
 
+  # pre-process
+  l <- Preprocess(ens=ens, ens.ref=ens.ref, obs=obs)
+  ens <- l[["ens"]]
+  ens.ref <- l[["ens.ref"]]
+  obs <- l[["obs"]]
+
   # sanity checks
-  if (class(ens) == "data.frame") {
-    ens <- as.matrix(ens)
-  }
-  if (class(ens.ref) == "data.frame") {
-    ens.ref <- as.matrix(ens.ref)
-  }
-  if (class(obs) == "data.frame") {
-    obs <- c(as.matrix(obs))
-  }
   stopifnot(is.numeric(c(ens, ens.ref, obs, tau)))
-  stopifnot(is.vector(obs))
   stopifnot(length(obs) > 1)
-  stopifnot(is.matrix(ens))
-  stopifnot(is.matrix(ens.ref))
-  stopifnot(nrow(ens)==length(obs))
-  stopifnot(nrow(ens.ref) == length(obs))
   stopifnot(is.numeric(tau))
   stopifnot(length(tau) == 1 | length(tau) == length(obs))
 

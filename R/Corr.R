@@ -8,21 +8,18 @@
 ################################
 Corr <- function(ens, obs, probs=c(0.025, 0.975)) {
 
-  if (class(ens) == "data.frame") {
-    ens <- as.matrix(ens)
-  }
-  if (class(obs) == "data.frame") {
-    obs <- as.matrix(obs)
-  }
-  obs <- as.vector(obs)
+  # pre-process
+  l <- Preprocess(ens=ens, obs=obs)
+  ens <- l[["ens"]]
+  obs <- l[["obs"]]
+
   N <- length(obs)
   if (N == 1) {
     stop("Cannot calculate correlation for a single instance")
   }
 
+  #calculate correlation
   ens.mean <- rowMeans(ens)
-  stopifnot(length(obs) == length(ens.mean))
-
   cc <- cor(obs, ens.mean)
 
   # calculate confidence interval by Fisher z-transform, return NA if N < 4

@@ -9,15 +9,10 @@
 
 ClimEns <- function(obs, leave.one.out=TRUE) {
 
-  if (class(obs) == "data.frame") {
-    obs <- as.matrix(obs)
-  }
+  obs <- Preprocess(obs=obs)[["obs"]]
 
-  obs <- as.vector(obs)
-  obs <- obs[is.finite(obs)]
-
-  if (length(obs) < 2) {
-    stop("Need at least 2 valid observations")
+  if (length(obs) < 2 & leave.one.out == TRUE) {
+    stop("Need at least 2 observations to construct leave-one-out ensemble")
   }
 
   # construct climatological ensemble matrix
