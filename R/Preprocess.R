@@ -1,76 +1,77 @@
-.GetClass <- function(x) {
-  # check class of object x, NA is logical
-  if (class(x) %in% c("numeric", "matrix", "data.frame", "logical")) {
-    if (length(x) == 1 && is.na(x)) cl <- "na"
-    if (is.numeric(x) && length(x) == 1) cl <- "scalar"
-    if (is.numeric(x) && length(x) > 1) cl <- "vector"
-    if (is.matrix(x)) cl <- "matrix"
-    if (is.data.frame(x)) cl <- "data.frame"
-  } else {
-    cl <- "unknown"
+.PreprocessEns <- function(x) {
+  # check class of x (note that it can have multiple classes, hence any(...))
+  cl.x <- class(x) 
+  if(!(any(cl.x %in% c("matrix", "data.frame", "numeric")))) {
+    stop("Can only handle ensembles of class matrix, data.frame, or numeric.")
   }
-  return(cl)
+  # interpret vector-valued ensemble as one K-member ensemble, i.e. one row
+  if (class(x) == "numeric") {
+    x <- matrix(x, nrow=1)
+  } else {
+    x <- as.matrix(x)
+  }
+  return(x)
+}
+.PreprocessObs <- function(x) {
+  # check class of x (note that can have multiple classes)
+  cl.x <- class(x) 
+  if(!(any(cl.x %in% c("matrix", "data.frame", "numeric")))) {
+    stop("Can only handle observations of class matrix, data.frame, or numeric.")
+  }
+  # collapse into a vector
+  x <- drop(as.matrix(x))
+  return(x)
+}
+.RemoveNaMembers <- function(x) {
+  na.cols <- apply(x, 2, function(z) all(is.na(z)))
+  return(x[, !na.cols, drop=FALSE])
 }
 
-.TransformEns <- function(ens, the.class) {
-  if (the.class == "vector") { 
-    ens <- matrix(ens, nrow=1)
-  } else if (the.class == "na") {
-    ens <- NA
-  } else if (the.class == "scalar") {
-    ens <- matrix(ens, nrow=1, ncol=1)
-  } else if (the.class == "vector") {
-    ens <- matrix(ens, nrow=1)
-  } else if (the.class == "data.frame") {
-    ens <- as.matrix(ens)
-  } else if (the.class == "matrix") {
-    # do nothing
-  } else if (the.class == "unknown") {
-    # do nothing
-  } else {
-    error(paste(c("Unknown class:", the.class)))
-  }
-  return(ens)
-}
 
-.TransformObs <- function(obs, the.class) {
-  if (the.class == "vector") { 
-    # do nothing
-  } else if (the.class == "na") {
-    obs <- NA
-  } else if (the.class == "scalar") {
-    # do nothing
-  } else if (the.class == "vector") {
-    # do nothing
-  } else if (the.class == "data.frame") {
-    obs <- c(as.matrix(data.frame))
-  } else if (the.class == "matrix") {
-    obs <- c(obs)
-  } else if (the.class == "unknown") {
-    # do nothing
-  } else {
-    error(paste(c("Unknown class:", the.class)))
-  }
-  return(obs)
-}
 
 Preprocess <- function(ens=NA, ens.ref=NA, obs=NA, ...) {
 
-  # get class of input argument 
-  classes <- sapply(list(ens=ens, ens.ref=ens.ref, obs=obs), .GetClass)
-  # transform to their appropriate matrix / vector representation
-  ens <- .TransformEns(ens, classes[["ens"]])
-  ens.ref <- .TransformEns(ens.ref, classes[["ens.ref"]])
-  obs <- .TransformObs(obs, classes[["obs"]])
+  # logical vector indicating which of ens, ens.ref, obs was provided as an argument
+  was.provided <- sapply(list(ens=ens, ens.ref=ens.ref, obs=obs), 
+                  function(x) !(class(x) == "logical" & all(is.na(x))))
+  if (!was.provided["ens"]) ens <- NA
+  if (!was.provided["ens.ref"]) ens.ref <- NA
+  if (!was.provided["obs"]) obs <- NA
 
-  if (all(classes == "na")) {
-    ret <- list(ens=NA, ens.ref=NA, obs=NA)
-  } else {
+  ### transform the ensembles to matrices or leave as NA ###
+  if (was.provided["ens"]) {
+    ens <- .PreprocessEns(ens)
+  }
+  if (was.provided["ens.ref"]) {
+    ens.ref <- .PreprocessEns(ens.ref)
+  }
 
-    # check equal length of time dimension
-    N <- c(ens=nrow(ens), ens.ref=nrow(ens.ref), obs=length(obs))
-    N[classes != "na"]
+  ### transform observation to vector or leave as NA ### 
+  if (was.provided["obs"]) {
+    obs <- .PreprocessObs(obs)
+  }
+  
+  # if more than one argument is provided, check for equal length of time
+  # dimension and stop if lenghts are different
+  if (sum(was.provided) > 1) {
+    # the `as.matrix` below is required to avoid errors if ens == NA
+    N.vec <- c(ens=nrow(as.matrix(ens)), ens.ref=nrow(as.matrix(ens.ref)), obs=length(obs))
+    if(length(unique(N.vec[was.provided])) != 1) {
+      stop("Inputs do not have equal time dimensions.")
+    }
+  }
 
+  # erase ensemble members that are all NA
+  if (was.provided["ens"]) {
+    ens <- .RemoveNaMembers(ens)
+  }
+  if (was.provided["ens.ref"]) {
+    ens.ref <- .RemoveNaMembers(ens.ref)
+  }
+
+  # return
+  ret <- list(ens=ens, ens.ref=ens.ref, obs=obs)
+  return(ret)
 
 }
 
