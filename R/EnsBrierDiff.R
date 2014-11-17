@@ -39,6 +39,10 @@ EnsBrierDiff <- function(ens, ens.ref, obs, tau=0.5, probs=NA) {
   br.ref <- EnsBrier(ens.ref, obs, tau)
   br.diff <- br.ref - br.ens
 
+  if (all(is.na(br.diff))) {
+    return(list(br.diff=NA, sampling.quantiles=probs*NA, p.value=NA))
+  }
+
   # calculate mean and sd
   mean.br.diff <- mean(br.diff, na.rm=TRUE)
   sd.br.diff <- sd(br.diff, na.rm=TRUE)
@@ -56,7 +60,7 @@ EnsBrierDiff <- function(ens, ens.ref, obs, tau=0.5, probs=NA) {
 
   # p value of paired one-sided t test for positive score difference
   p.value <- ifelse(N>1, 
-    1-pt(mean.br.diff / sd(br.diff) * sqrt(N), df=N-1), 
+    1-pt(mean.br.diff / sd.br.diff * sqrt(N), df=N-1), 
     NA)
 
   #return

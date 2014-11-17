@@ -29,7 +29,7 @@ CorrDiff <- function(ens, ens.ref, obs, sign.level=0.05) {
   # auxiliary quantities
   r12 <- cc.ens[1]
   r13 <- cc.ref[1]
-  r23 <- cor(rowMeans(ens), rowMeans(ens.ref))
+  r23 <- cor(rowMeans(ens), rowMeans(ens.ref), use="pairwise.complete.obs")
 
   # confidence interval, according to zou 2007, example 2
   if (sign.level <= 0 | sign.level >= 1) {
@@ -74,7 +74,7 @@ CorrDiff <- function(ens, ens.ref, obs, sign.level=0.05) {
 
   #return
   ret <- c(cc.diff, L, U, p.value)
-  names(ret) <- c("corr.diff", paste(c("L","U"),1-sign.level, sep=""), "p.value")
+  names(ret) <- c("corr.diff", c("L","U"), "p.value")
   return(ret)
 }
 

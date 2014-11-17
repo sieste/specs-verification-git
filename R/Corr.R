@@ -15,7 +15,9 @@ Corr <- function(ens, obs, probs=c(0.025, 0.975)) {
 
   N <- length(obs)
   if (N == 1) {
-    stop("Cannot calculate correlation for a single instance")
+    ci <- rep(NA, length(probs))
+    names(ci) <- paste("q",round(probs, 4), sep="")
+    return(c(corr=NA, ci, p.value=NA))
   }
 
   #calculate correlation

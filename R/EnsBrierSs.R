@@ -19,7 +19,7 @@
 EnsBrierSs <- function(ens, ens.ref, obs, tau=0.5) {
 
   # pre-process
-  l <- Preprocess(ens=ens, ens.ref=ens.ref, obs=obs)
+  l <- Preprocess(ens=ens, ens.ref=ens.ref, obs=obs) 
   ens <- l[["ens"]]
   ens.ref <- l[["ens.ref"]]
   obs <- l[["obs"]]
@@ -27,21 +27,39 @@ EnsBrierSs <- function(ens, ens.ref, obs, tau=0.5) {
   # sanity checks
   stopifnot(length(tau) == 1 | length(tau) == length(obs))
 
-  N <- length(obs)
 
   # calculate Brier skill score 
   br.ens <- EnsBrier(ens, obs, tau)
   br.ref <- EnsBrier(ens.ref, obs, tau)
-  bss <- 1 - mean(br.ens) / mean(br.ref)
+
+  # only use pairwise complete scores
+  i.na <- !(is.na(br.ens + br.ref))
+  br.ens <- br.ens[i.na]
+  br.ref <- br.ref[i.na]
+
+  if (!any(i.na)) {
+    return(list(bss=NA, bss.sigma=NA))
+  }
+
+  # calculate auxiliary quantities
+  N <- length(obs)
+  m.br.ens <- mean(br.ens)
+  m.br.ref <- mean(br.ref)
+  v.br.ens <- var(br.ens)
+  v.br.ref <- var(br.ref)
+  cov.br   <- cov(br.ens, br.ref)
+
+  # calculate skill score
+  bss <- 1 - m.br.ens / m.br.ref
 
   # update N
   N <- N - sum(is.na(br.ens+br.ref))
 
   # calculate error propagation standard deviation
   bss.sigma <- ifelse(N > 1,
-         1 / sqrt(N) * sqrt( var(br.ens) / mean(br.ref)^2 + 
-         var(br.ref) * mean(br.ens)^2 / mean(br.ref)^4 - 
-         2 * cov(br.ens, br.ref) * mean(br.ens) / mean(br.ref)^3),
+         1 / sqrt(N) * sqrt( v.br.ens / m.br.ref^2 + 
+         v.br.ref * m.br.ens^2 / m.br.ref^4 - 
+         2 * cov.br * m.br.ens / m.br.ref^3),
          NA)
 
   #return
