@@ -31,8 +31,6 @@ EnsBrierDiff <- function(ens, ens.ref, obs, tau=0.5, probs=NA) {
   stopifnot(length(tau) == 1 | length(tau) == length(obs))
 
   N <- length(obs)
-  K <- ncol(ens)
-  K.ref <- ncol(ens.ref)
 
   # calculate Brier score differences
   br.ens <- EnsBrier(ens, obs, tau)
