@@ -19,8 +19,11 @@ Corr <- function(ens, obs, probs=c(0.025, 0.975)) {
   }
 
   #calculate correlation
-  ens.mean <- rowMeans(ens)
-  cc <- cor(obs, ens.mean)
+  ens.mean <- rowMeans(ens, na.rm=TRUE)
+  cc <- cor(obs, ens.mean, use="pairwise.complete.obs")
+
+  # update N
+  N <- N - sum(is.na(ens.mean + obs))
 
   # calculate confidence interval by Fisher z-transform, return NA if N < 4
   if (N < 4) {

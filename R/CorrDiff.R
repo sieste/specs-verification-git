@@ -17,10 +17,6 @@ CorrDiff <- function(ens, ens.ref, obs, sign.level=0.05) {
   ens.ref <- l[["ens.ref"]]
   obs <- l[["obs"]]
 
-  # sanity checks
-  stopifnot(is.numeric(c(ens, ens.ref, obs)))
-  stopifnot(is.vector(obs), length(obs) > 1)
-
   N <- length(obs)
 
   # calculate correlation coefficients and their confidence intervals
@@ -59,6 +55,10 @@ CorrDiff <- function(ens, ens.ref, obs, sign.level=0.05) {
     U <- r12 - r13 + sqrt((u1 - r12)^2 + (r13-l2)^2 - 
       2*c.12.13*(u1-r12)*(r13-l2))
   }
+
+  # N minus number of NA rows
+  N <- length(obs) - sum(is.na(rowSums(ens, na.rm=TRUE) + 
+       rowSums(ens.ref, na.rm=TRUE) + obs))
 
   # p value of one-sided test for equality of dependent correlation
   # coefficients (steiger 1980 Eq 7)

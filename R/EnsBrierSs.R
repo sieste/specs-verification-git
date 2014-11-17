@@ -25,26 +25,24 @@ EnsBrierSs <- function(ens, ens.ref, obs, tau=0.5) {
   obs <- l[["obs"]]
 
   # sanity checks
-  stopifnot(is.numeric(c(ens, ens.ref, obs, tau)))
-  stopifnot(length(obs) > 1)
-  stopifnot(is.numeric(tau))
   stopifnot(length(tau) == 1 | length(tau) == length(obs))
 
   N <- length(obs)
-  K <- ncol(ens)
-  K.ref <- ncol(ens.ref)
 
   # calculate Brier skill score 
   br.ens <- EnsBrier(ens, obs, tau)
   br.ref <- EnsBrier(ens.ref, obs, tau)
   bss <- 1 - mean(br.ens) / mean(br.ref)
-  bss.sigma <- 1 / sqrt(N) * sqrt( var(br.ens) / mean(br.ref)^2 + 
+
+  # update N
+  N <- N - sum(is.na(br.ens+br.ref))
+
+  # calculate error propagation standard deviation
+  bss.sigma <- ifelse(N > 1,
+         1 / sqrt(N) * sqrt( var(br.ens) / mean(br.ref)^2 + 
          var(br.ref) * mean(br.ens)^2 / mean(br.ref)^4 - 
-         2 * cov(br.ens, br.ref) * mean(br.ens) / mean(br.ref)^3)
-
-  #return
-  list(bss=bss, bss.sigma=bss.sigma)
-
+         2 * cov(br.ens, br.ref) * mean(br.ens) / mean(br.ref)^3),
+         NA)
 
   #return
   list(bss=bss, bss.sigma=bss.sigma)
