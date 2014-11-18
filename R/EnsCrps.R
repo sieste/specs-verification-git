@@ -18,8 +18,8 @@ EnsCrps <- function(ens, obs) {
   K[K==0] <- NA
 
   crps <- sapply(1:N, function(i) 
-            mean(abs(ens[i,] - obs[i]), na.rm=TRUE) - sum(dist(ens[i,]), na.rm=TRUE) / (K[i]^2)
-          )
+            mean(abs(ens[i,] - obs[i]), na.rm=TRUE) - 
+            sum(dist(ens[i,]), na.rm=TRUE) / (K[i]^2))
   crps[is.nan(crps)] <- NA
   
   return(crps)
