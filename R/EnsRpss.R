@@ -14,21 +14,8 @@
 ################################
 EnsRpss <- function(ens, ens.ref, obs) {
 
-  # sanity checks
-  if (class(ens) == "data.frame") {
-    ens <- as.matrix(ens)
-  }
-  if (class(ens.ref) == "data.frame") {
-    ens.ref <- as.matrix(ens.ref)
-  }
-  if (class(obs) == "data.frame") {
-    obs <- as.matrix(obs)
-  }
-  stopifnot(is.numeric(c(ens, ens.ref, obs)))
-  stopifnot(is.matrix(obs), is.matrix(ens), is.matrix(ens.ref))
   stopifnot(all(dim(ens) == dim(obs)))
   stopifnot(all(dim(ens.ref) == dim(obs)))
-  stopifnot(all.equal(ncol(ens), ncol(ens.ref), ncol(obs)))
 
   N <- nrow(obs)
 
