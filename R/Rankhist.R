@@ -5,12 +5,12 @@
 #########################################
 Rankhist <- function(ens, obs, reduce.bins=1) {
 
-  if (class(ens) == "data.frame") {
-    ens <- as.matrix(ens)
-  }
-  if (class(obs) == "data.frame") {
-    obs <- c(as.matrix(obs))
-  }
+
+  # preprocess
+  l <- Preprocess(ens=ens, obs=obs)
+  ens <- l[["ens"]]
+  obs <- l[["obs"]]
+
   stopifnot(nrow(ens) == length(obs))
   N <- dim(ens)[1]
   K <- dim(ens)[2]
