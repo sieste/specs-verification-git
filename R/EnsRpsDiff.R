@@ -19,13 +19,13 @@ EnsRpsDiff <- function(ens, ens.ref, obs, probs=NA) {
   stopifnot(all(dim(ens) == dim(obs)))
   stopifnot(all(dim(ens.ref) == dim(obs)))
 
-  N <- nrow(obs)
 
   # calculate RPS score differences
   rps.ens <- EnsRps(ens, obs)
   rps.ref <- EnsRps(ens.ref, obs)
   rps.diff <- rps.ref - rps.ens
-  mean.rps.diff <- mean(rps.diff)
+  N <- nrow(obs) - sum(is.na(rps.diff))
+  mean.rps.diff <- mean(rps.diff, na.rm=TRUE)
 
   # quantiles of the sampling distribution 
   cis <- NA
