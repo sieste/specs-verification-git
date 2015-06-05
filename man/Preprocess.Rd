@@ -18,12 +18,12 @@ Preprocess(ens=NA, ens.ref=NA, obs=NA)
 \details{
   Here is roughly what the function does, in that order:
 
-  \item{check which of the three arguments were provided by comparing them to NA}
-  \item{check if ens and ens.ref and obs are of class `data.frame`, `numeric`, or `matrix`; otherwise stop}
-  \item{vector-valued ensembles are interpreted as one K-member ensemble, rather than K 1-member ensembles}
-  \item{ens and ens.ref are coerced to class `matrix` by `as.matrix`, obs to class `numeric` i.e. vector}
-  \item{check whether all provided objects have the same length in the time dimension; otherwise stop}
-  \item{ensemble members (i.e. columns) which have all entries NA are removed}
+  - check which of the three arguments were provided by comparing them to NA\cr
+  - check if ens and ens.ref and obs are of class `data.frame`, `numeric`, or `matrix`; otherwise stop\cr
+  - vector-valued ensembles are interpreted as one K-member ensemble, rather than K 1-member ensembles\cr
+  - ens and ens.ref are coerced to class `matrix` by `as.matrix`, obs to class `numeric` i.e. vector\cr
+  - check whether all provided objects have the same length in the time dimension; otherwise stop\cr
+  - ensemble members (i.e. columns) which have all entries NA are removed\cr
 }
 \examples{
   # Example:
