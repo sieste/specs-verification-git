@@ -17,14 +17,20 @@ EnsRpss <- function(ens, ens.ref, obs) {
   stopifnot(all(dim(ens) == dim(obs)))
   stopifnot(all(dim(ens.ref) == dim(obs)))
 
-  N <- nrow(obs)
 
   # calculate RPS score differences
   rps.ens <- EnsRps(ens, obs)
   rps.ref <- EnsRps(ens.ref, obs)
 
+  # only use cases where both scores are not NA
+  i.nna <- which(!is.na(rps.ens + rps.ref))
+  rps.ens <- rps.ens[i.nna]
+  rps.ref <- rps.ref[i.nna]
+  N <- length(i.nna)
 
+  # calculate skill score
   rpss <- 1 - mean(rps.ens) / mean(rps.ref)
+  # estimate standard deviation by propagation of uncertainty 
   rpss.sigma <- 1 / sqrt(N) * sqrt( var(rps.ens) / mean(rps.ref)^2 + 
          var(rps.ref) * mean(rps.ens)^2 / mean(rps.ref)^4 - 
          2 * cov(rps.ens, rps.ref) * mean(rps.ens) / mean(rps.ref)^3)

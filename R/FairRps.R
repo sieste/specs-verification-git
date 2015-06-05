@@ -16,7 +16,6 @@ FairRps <- function(ens, obs) {
 
   stopifnot(all(dim(ens)==dim(obs)))
   stopifnot(all(rowSums(obs) == 1))
-  stopifnot(all(rowSums(ens) > 1))
 
   frps <- 
   sapply(1:nrow(ens), function(i) {
