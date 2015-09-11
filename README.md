@@ -37,7 +37,7 @@ To **load** the package from the library directory `/tmp`, and list all its func
 
 ### Changelog
 
-* 2015-09-11: submitted version 0.4-0 to CRAN
+* 2015-09-11: **version 0.4-0** available on CRAN
 * 2015-06-03: added functions to preprocess ensemble and observation data (e.g. transform from data.frame to matrix, handle NA's, etc)
 * 2014-10-28: implemented and documented `Corr` and `CorrDiff` routines, that calculate correlation of the ensemble mean, and difference between two correlation coefficients evaluated over the same observation, including confidence intervals and p values 
 * 2014-10-15: added `reduce.bins` option to `Rankhist` function
