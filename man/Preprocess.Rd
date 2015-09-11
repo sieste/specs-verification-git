@@ -5,12 +5,12 @@
 Preprocess ensemble and observation data for use with verification routines.
 }
 \usage{
-Preprocess(ens=NA, ens.ref=NA, obs=NA)
+Preprocess(ens=NULL, ens.ref=NULL, obs=NULL)
 }
 \arguments{
-  \item{ens}{A data.frame, vector, or matrix; or NA (default).}
-  \item{ens.ref}{A data.frame, vector, or matrix; or NA (default).}
-  \item{obs}{A data.frame, vector, or matrix; or NA (default).}
+  \item{ens}{A data.frame, vector, or matrix; or NULL (default).}
+  \item{ens.ref}{A data.frame, vector, or matrix; or NULL (default).}
+  \item{obs}{A data.frame, vector, or matrix; or NULL (default).}
 }
 \value{
   The function returns a list with elements ens, ens.ref and obs.
@@ -18,7 +18,7 @@ Preprocess(ens=NA, ens.ref=NA, obs=NA)
 \details{
   Here is roughly what the function does, in that order:
 
-  - check which of the three arguments were provided by comparing them to NA\cr
+  - check which of the three arguments were provided by comparing them to NULL\cr
   - check if ens and ens.ref and obs are of class `data.frame`, `numeric`, or `matrix`; otherwise stop\cr
   - vector-valued ensembles are interpreted as one K-member ensemble, rather than K 1-member ensembles\cr
   - ens and ens.ref are coerced to class `matrix` by `as.matrix`, obs to class `numeric` i.e. vector\cr
