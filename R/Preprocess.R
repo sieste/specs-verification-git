@@ -34,7 +34,7 @@
 
 
 
-Preprocess <- function(ens=NULL, ens.ref=NULL, obs=NULL, ...) {
+Preprocess <- function(ens=NULL, ens.ref=NULL, obs=NULL) {
 
   # logical vector indicating which of ens, ens.ref, obs was provided as an argument
   was.provided <- sapply(list(ens=ens, ens.ref=ens.ref, obs=obs), 
