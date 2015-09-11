@@ -46,7 +46,7 @@ BrierScoreDecomposition <- function(p, y, calibration=list(method="bin", bins=10
   }
 
   # estimate climatology
-  clim <- mean(y)
+  clim <- mean(y, na.rm=TRUE)
 
   # calculate the components
   REL <- mean((p - cal)^2, na.rm=TRUE)
@@ -97,7 +97,7 @@ BrierScoreDecomposition <- function(p, y, calibration=list(method="bin", bins=10
         options(warn=w)
       } 
       # estimate climatology
-      clim <- mean(by)
+      clim <- mean(by, na.rm=TRUE)
 
       # calculate the components
       REL <- mean((bp - cal)^2, na.rm=TRUE)

@@ -10,22 +10,12 @@
 ################################
 FairRps <- function(ens, obs) {
 
-  # sanity checks
-  if (class(ens) == "data.frame") {
-    ens <- as.matrix(ens)
-  }
-  if (class(obs) == "data.frame") {
-    obs <- as.matrix(obs)
-  }
-  if (is.null(dim(ens))) {
-    ens <- matrix(ens, nrow=1)
-  }
-  if (is.null(dim(obs))) {
-    obs <- matrix(obs, nrow=1)
-  }
+  # preprocess
+  l <- Preprocess(ens=ens)
+  ens <- l[["ens"]]
+
   stopifnot(all(dim(ens)==dim(obs)))
   stopifnot(all(rowSums(obs) == 1))
-  stopifnot(all(rowSums(ens) > 1))
 
   frps <- 
   sapply(1:nrow(ens), function(i) {

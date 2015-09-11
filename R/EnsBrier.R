@@ -8,21 +8,22 @@
 #
 ################################
 EnsBrier <- function(ens, obs, tau=0.5) {
-  if (class(ens) == "data.frame") {
-    ens <- as.matrix(ens)
-  }
-  if (class(obs) == "data.frame") {
-    obs <- c(as.matrix(obs))
-  }
-  obs <- matrix(obs, ncol=1)
-  if (is.null(dim(ens))) {
-    ens <- matrix(ens, nrow=1)
-  }
-  stopifnot(nrow(ens) == nrow(obs))
 
-  K <- ncol(ens)
-  i <- rowSums(ens > tau)
+  # pre-processing
+  l <- Preprocess(ens=ens, obs=obs)
+  ens <- l[["ens"]]
+  obs <- l[["obs"]]
+
+  # calculate brier scores #
+  ##########################
+  # count number of non-NA members per forecast
+  K <- apply(ens, 1, function(x) length(x[!is.na(x)]))
+  K[K==0] <- NA
+  # count number of ensemble members > tau
+  i <- rowSums(ens > tau, na.rm=TRUE)
+  # calculate "observation > tau" indicator
   j <- 1 * (obs > tau)
+  # calculate brier score
   br <- (j - i / K) ^ 2 
   return(br)
 }

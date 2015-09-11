@@ -14,30 +14,23 @@
 ################################
 FairRpss <- function(ens, ens.ref, obs) {
 
-  # sanity checks
-  if (class(ens) == "data.frame") {
-    ens <- as.matrix(ens)
-  }
-  if (class(ens.ref) == "data.frame") {
-    ens.ref <- as.matrix(ens.ref)
-  }
-  if (class(obs) == "data.frame") {
-    obs <- as.matrix(obs)
-  }
-  stopifnot(is.numeric(c(ens, ens.ref, obs)))
-  stopifnot(is.matrix(obs), is.matrix(ens), is.matrix(ens.ref))
   stopifnot(all(dim(ens) == dim(obs)))
   stopifnot(all(dim(ens.ref) == dim(obs)))
-  stopifnot(all.equal(ncol(ens), ncol(ens.ref), ncol(obs)))
 
-  N <- nrow(obs)
 
   # calculate fair RPS score differences
   rps.ens <- FairRps(ens, obs)
   rps.ref <- FairRps(ens.ref, obs)
 
+  # only use cases where both scores are not NA
+  i.nna <- which(!is.na(rps.ens + rps.ref))
+  rps.ens <- rps.ens[i.nna]
+  rps.ref <- rps.ref[i.nna]
+  N <- length(i.nna)
 
+  # calculate skill score
   rpss <- 1 - mean(rps.ens) / mean(rps.ref)
+  # estimate standard deviation by propagation of uncertainty 
   rpss.sigma <- 1 / sqrt(N) * sqrt( var(rps.ens) / mean(rps.ref)^2 + 
          var(rps.ref) * mean(rps.ens)^2 / mean(rps.ref)^4 - 
          2 * cov(rps.ens, rps.ref) * mean(rps.ens) / mean(rps.ref)^3)

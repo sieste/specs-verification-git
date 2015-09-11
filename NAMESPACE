@@ -1,6 +1,17 @@
+importFrom("grDevices", "gray")
+importFrom("graphics", "axis", "barplot", "box", "hist", "lines",
+           "mtext", "par", "plot", "points", "polygon")
+importFrom("stats", "coef", "cov", "dist", "dnorm", "fitted", "glm",
+           "lm", "optim", "pbinom", "pchisq", "pnorm", "pt", "qt",
+           "quantile", "rbinom", "rnorm", "sd", "var", "cor", "qnorm")
+importFrom("utils", "tail")
+
 useDynLib(SpecsVerification)
+
 export(BrierScoreDecomposition)
 export(ClimEns)
+export(Corr)
+export(CorrDiff)
 export(Detrend)
 export(DressCrps)
 export(DressCrpsDiff)
@@ -36,6 +47,7 @@ export(GetDensity)
 export(GenerateToyData)
 export(PlotDressedEns)
 export(PlotRankhist)
+export(Preprocess)
 export(Rankhist)
 export(ReliabilityDiagram)
 export(TestRankhist) 

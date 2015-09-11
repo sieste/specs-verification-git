@@ -14,39 +14,21 @@
 ################################
 FairCrps <- function(ens, obs) {
 
-  if (class(ens) == "data.frame") {
-    ens <- as.matrix(ens)
-  }
-  if (class(obs) == "data.frame") {
-    obs <- as.matrix(obs)
-  }
+  # pre-processing
+  l <- Preprocess(ens=ens, obs=obs)
+  ens <- l[["ens"]]
+  obs <- l[["obs"]]
 
-  obs <- as.vector(obs)
-  if (length(obs) == 1) {
-  # single instance
-    if (is.matrix(ens)) {
-      ens <- as.vector(ens)
-    }
-    K <- length(ens)
-    if (K == 1) {
-    # for one ensemble member, the crps reduces to the absolute error
-      crps <- abs(ens - obs)
-    } else {
-      crps <- mean(abs(ens - obs)) - sum(dist(ens)) / K / (K - 1)
-    }
-  } else {
-  # multiple instances
-    N <- length(obs)
-    K <- ncol(ens)
-    stopifnot(length(obs) == nrow(ens))
-    if (K == 1) {
-      crps <- abs(ens - obs)
-    } else {
-      crps <- sapply(1:N, function(i) 
-                mean(abs(ens[i,] - obs[i])) - sum(dist(ens[i,])) / K / (K - 1)
-              )
-    }
-  }
+  N <- length(obs)
+  K <- apply(ens, 1, function(x) length(x[!is.na(x)]))
+  K[K==0 | K==1] <- NA
+
+  crps <- sapply(1:N, function(i) 
+            mean(abs(ens[i,] - obs[i]), na.rm=TRUE) - 
+            sum(dist(ens[i,]), na.rm=TRUE) / 
+            (K[i] * (K[i]-1)))
+  crps[is.nan(crps)] <- NA
+  
   return(crps)
 }
 

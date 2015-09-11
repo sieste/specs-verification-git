@@ -10,36 +10,47 @@
 ################################
 FairCrpss <- function(ens, ens.ref, obs) {
 
-  # sanity checks
-  if (class(ens) == "data.frame") {
-    ens <- as.matrix(ens)
-  }
-  if (class(ens.ref) == "data.frame") {
-    ens.ref <- as.matrix(ens.ref)
-  }
-  if (class(obs) == "data.frame") {
-    obs <- c(as.matrix(obs))
-  }
-  stopifnot(is.numeric(c(ens, ens.ref, obs)))
-  stopifnot(is.vector(obs), length(obs) > 1)
-  stopifnot(is.matrix(ens), is.matrix(ens.ref))
-  stopifnot(nrow(ens)==length(obs), nrow(ens.ref) == length(obs))
+  # pre-process
+  l <- Preprocess(ens=ens, ens.ref=ens.ref, obs=obs) 
+  ens <- l[["ens"]]
+  ens.ref <- l[["ens.ref"]]
+  obs <- l[["obs"]]
 
-  N <- length(obs)
-  K <- ncol(ens)
-  K.ref <- ncol(ens.ref)
-  obs <- matrix(obs, ncol=1)
-
-  K <- ncol(ens)
-  K.ref <- ncol(ens.ref)
-
-  # calculate fair crps difference
+  # calculate individual scores
   crps.ens <- FairCrps(ens, obs)
   crps.ref <- FairCrps(ens.ref, obs)
-  crpss <- 1 - mean(crps.ens) / mean(crps.ref)
-  crpss.sigma <- 1 / sqrt(N) * sqrt( var(crps.ens) / mean(crps.ref)^2 + 
-         var(crps.ref) * mean(crps.ens)^2 / mean(crps.ref)^4 - 
-         2 * cov(crps.ens, crps.ref) * mean(crps.ens) / mean(crps.ref)^3)
+
+  # only use pairwise complete scores
+  i.na <- !(is.na(crps.ens + crps.ref))
+  crps.ens <- crps.ens[i.na]
+  crps.ref <- crps.ref[i.na]
+
+  if (!any(i.na)) {
+    return(list(bss=NA, bss.sigma=NA))
+  }
+
+
+  # calculate auxiliary quantities
+  N <- length(obs)
+  m.crps.ens <- mean(crps.ens)
+  m.crps.ref <- mean(crps.ref)
+  v.crps.ens <- var(crps.ens)
+  v.crps.ref <- var(crps.ref)
+  cov.crps   <- cov(crps.ens, crps.ref)
+
+  # calculate skill score
+  crpss <- 1 - m.crps.ens / m.crps.ref
+
+  # update N
+  N <- N - sum(is.na(crps.ens+crps.ref))
+
+
+  # calculate error propagation standard deviation
+  crpss.sigma <- ifelse(N > 1,
+         1 / sqrt(N) * sqrt( v.crps.ens / m.crps.ref^2 + 
+         v.crps.ref * m.crps.ens^2 / m.crps.ref^4 - 
+         2 * cov.crps * m.crps.ens / m.crps.ref^3),
+         NA)
 
   #return
   list(crpss=crpss, crpss.sigma=crpss.sigma)

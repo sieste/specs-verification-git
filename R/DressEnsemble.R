@@ -2,9 +2,9 @@ DressEnsemble <- function(ens, dressing.method="silverman",
                           parameters=NA) 
 {
 
-  if (class(ens) == "data.frame") {
-    ens <- as.matrix(ens)
-  }
+  # preprocess
+  l <- Preprocess(ens=ens)
+  ens <- l[["ens"]]
 
   # silverman's rule of thumb
   if (dressing.method == "silverman") {

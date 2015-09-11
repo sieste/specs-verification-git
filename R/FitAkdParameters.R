@@ -4,13 +4,10 @@ FitAkdParameters <- function(ens, obs) {
   # where   s(x) = (4/3/K)^0.4 * (s1 + s2 * a^2 * var(x))
   # and   z.i(x) = r1 + r2 * mean(x) + a * x[i]
 
-  # sanity checks
-  if (class(ens) == "data.frame") {
-    ens <- as.matrix(ens)
-  }
-  if (class(obs) == "data.frame") {
-    obs <- c(as.matrix(obs))
-  }
+  # preprocess
+  l <- Preprocess(ens=ens, obs=obs)
+  ens <- l[["ens"]]
+  obs <- as.vector(l[["obs"]])
   stopifnot(nrow(ens) == length(obs))
 
   # ensemble means

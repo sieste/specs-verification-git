@@ -16,29 +16,16 @@
 ################################
 EnsRpsDiff <- function(ens, ens.ref, obs, probs=NA) {
 
-  # sanity checks
-  if (class(ens) == "data.frame") {
-    ens <- as.matrix(ens)
-  }
-  if (class(ens.ref) == "data.frame") {
-    ens.ref <- as.matrix(ens.ref)
-  }
-  if (class(obs) == "data.frame") {
-    obs <- as.matrix(obs)
-  }
-  stopifnot(is.numeric(c(ens, ens.ref, obs)))
-  stopifnot(is.matrix(obs), is.matrix(ens), is.matrix(ens.ref))
   stopifnot(all(dim(ens) == dim(obs)))
   stopifnot(all(dim(ens.ref) == dim(obs)))
-  stopifnot(all.equal(ncol(ens), ncol(ens.ref), ncol(obs)))
 
-  N <- nrow(obs)
 
   # calculate RPS score differences
   rps.ens <- EnsRps(ens, obs)
   rps.ref <- EnsRps(ens.ref, obs)
   rps.diff <- rps.ref - rps.ens
-  mean.rps.diff <- mean(rps.diff)
+  N <- nrow(obs) - sum(is.na(rps.diff))
+  mean.rps.diff <- mean(rps.diff, na.rm=TRUE)
 
   # quantiles of the sampling distribution 
   cis <- NA
@@ -50,7 +37,11 @@ EnsRpsDiff <- function(ens, ens.ref, obs, probs=NA) {
   }
 
   # p value of paired one-sided t test for positive score difference
-  p.value <- 1-pt(mean.rps.diff / sd(rps.diff) * sqrt(N), df=N-1)
+  if (N > 1) {
+    p.value <- 1-pt(mean.rps.diff / sd(rps.diff) * sqrt(N), df=N-1)
+  } else {
+    p.value <- NA
+  }
 
   #return
   list(rps.diff=mean.rps.diff, sampling.quantiles=cis, p.value=p.value)
