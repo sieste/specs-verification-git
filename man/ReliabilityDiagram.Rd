@@ -5,7 +5,7 @@
   Calculate and plot the reliability diagram of a collection of probability forecasts and their corresponding binary observations.
 }
 \usage{
-ReliabilityDiagram(probs, obs, bins, nboot, plot, plot.refin, cons.probs)
+ReliabilityDiagram(probs, obs, bins, nboot, plot, plot.refin, cons.probs, attributes)
 }
 \arguments{
   \item{probs}{vector of length N. probs[k] has the predicted probability for the event obs[k]}
