@@ -12,8 +12,9 @@ Detrend <- function(x, demean=TRUE) {
   } else {
     # otherwise estimate a linear function of time and take the fitted values
     # as "the trend" 
-    lmod <- lm(xx~(t=1:N))
-    trnd <- drop(cbind(1, xx) %*% coef(lmod))
+    t <- 1:N
+    lmod <- lm(xx~t)
+    trnd <- drop(cbind(1, t) %*% coef(lmod))
   }
   # if demean is false, add the grand mean back to x minus trend
   m <- ifelse(demean, 0, mean(unlist(x), na.rm=TRUE))

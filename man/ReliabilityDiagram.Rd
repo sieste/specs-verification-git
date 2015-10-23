@@ -5,16 +5,17 @@
   Calculate and plot the reliability diagram of a collection of probability forecasts and their corresponding binary observations.
 }
 \usage{
-ReliabilityDiagram(probs, obs, bins, nboot, plot, plot.refin, cons.probs)
+ReliabilityDiagram(probs, obs, bins, nboot, plot, plot.refin, cons.probs, attributes)
 }
 \arguments{
   \item{probs}{vector of length N. probs[k] has the predicted probability for the event obs[k]}
   \item{obs}{vector of length N. obs[k] = 1 if the event happened at instance k, obs[k] = 0 otherwise}
   \item{bins}{scalar or vector. Number of equidistant bins to discretize the forecast probabilities, or vector of user-defined breakpoints of the bins. Default: 10}
   \item{nboot}{Number of bootstrap resamples for estimating consistency bars. If nboot==0, no resampling is done and NAs are returned as consistency bars. Default: 500}
-  \item{plot}{boolean. Whether to plot the reliability diagram. Default: FALSE}
-  \item{plot.refin}{boolean. Whether to plot the small refinement histogram in lower right corner. Default: TRUE}
+  \item{plot}{logical. Whether to plot the reliability diagram. Default: FALSE}
+  \item{plot.refin}{logical. Whether to plot the small refinement histogram in lower right corner. Default: TRUE}
   \item{cons.probs}{vector of length 2. Lower and upper probability for the consistency bars. Default: c(0.025, 0.975)}
+  \item{attributes}{logical. Whether to include the no-resolution and no-skill line. Default: FALSE}
 }
 \value{
 A data frame of nbins rows with the following columns:

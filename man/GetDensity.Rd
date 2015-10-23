@@ -10,7 +10,7 @@ GetDensity(dressed.ens, x, integrated=FALSE)
 \arguments{
   \item{dressed.ens}{An object of class `dressed.ens`. See `?DressEns` for details.}
   \item{x}{matrix with either 1 or nrow(dressed.ens[["ens"]]) rows and an arbitrary number of columns. The x-values at which the forecast distributions are to be evaluated. See section Details.} 
-  \item{integrated}{boolean, (default=FALSE): If `integrated` is TRUE, the integrated density (i.e. the value of the cumulative distribution function) instead of the density is returned.}
+  \item{integrated}{logical, (default=FALSE): If `integrated` is TRUE, the integrated density (i.e. the value of the cumulative distribution function) instead of the density is returned.}
 }
 \value{
   The function returns a matrix, whose rows correspond to the individual ensemble forecasts and whose columns correspond to the values provided by the argument `x`.

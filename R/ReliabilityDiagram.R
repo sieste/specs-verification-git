@@ -6,7 +6,7 @@
 ReliabilityDiagram <- 
 function(probs, obs, bins=10, nboot=500, 
          plot=FALSE, plot.refin=TRUE, 
-         cons.probs=c(0.025, 0.975)) 
+         cons.probs=c(0.025, 0.975),attributes=FALSE) 
 {
   #
   # Plot reliability diagram for a probability forecast
@@ -30,7 +30,9 @@ function(probs, obs, bins=10, nboot=500,
   #    plot.refin ... boolean; whether to plot the small refinement histogram
   #                   in lower right corner
   #    cons.probs ... a 2-vector, lower and upper confidence limit
-  #
+  #    attributes ... logical, whether to plot attributes (polygon, 
+  #                   no-resolution and no-skill line) 
+  #                   
   # Return value:
   #
   #    a data frame of K+1 rows with the following columns:
@@ -51,11 +53,14 @@ function(probs, obs, bins=10, nboot=500,
   #    N <- 1000
   #    p <- rbeta(N, 1, 3)
   #    y <- rbinom(N, 1, p)
-  #    rd <- rel.diag(p, y, plot=TRUE)
+  #    rd <- ReliabilityDiagram(p, y, plot=TRUE)
   #    print(rd)
   #
   #
   # change log:
+  #
+  #  2015/06/15
+  #  * added option `attributes` 
   #
   #  2013/12/02
   #  * manual definition of bin-breaks
@@ -161,6 +166,18 @@ function(probs, obs, bins=10, nboot=500,
     plot(NULL, xlim = c(0,1), ylim = c(0,1),
        xlab= "Forecast probability",
        ylab="Observed relative frequency")
+   if (attributes) {
+       obs.clim<- sum(g)/sum(h)
+       a   <- (1-obs.clim)/2 + obs.clim
+       b   <- obs.clim / 2
+       x.p <- c(obs.clim, obs.clim, 1, 1, 0, 0)
+       y.p <- c(0, 1, 1, a, b, 0)
+       polygon(x.p, y.p, col = "#e6e6e6")
+       abline(h=obs.clim,lty=2)
+       text( 0.9, obs.clim, "No resolution", pos = 3)
+       text(0.9, obs.clim + (a-b)*(0.9 - obs.clim), "No skill", pos = 1,
+     	   srt = atan( a - b )/(2*pi)*360 )
+    }
     # consistency bars
     for (i in 1:length(p.avgs)) {
         lines(rep(p.avgs[i], 2), cons.bars[, i], col="#CCCCCC", lwd=6)
