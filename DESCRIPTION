@@ -1,6 +1,6 @@
 Package: SpecsVerification
 Version: 0.4-1
-Date: 2015-09-11
+Date: 2015-10-23
 Title: Forecast Verification Routines for the SPECS FP7 Project
 Authors@R: c(person("Stefan", "Siegert", role = c("aut", "cre"),
                      email = "s.siegert@exeter.ac.uk"))
