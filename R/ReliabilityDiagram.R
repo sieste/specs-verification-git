@@ -6,7 +6,7 @@
 ReliabilityDiagram <- 
 function(probs, obs, bins=10, nboot=500, 
          plot=FALSE, plot.refin=TRUE, 
-         cons.probs=c(0.025, 0.975),attributes=FALSE) 
+         cons.probs=c(0.025, 0.975), attributes=FALSE) 
 {
   #
   # Plot reliability diagram for a probability forecast
@@ -50,15 +50,18 @@ function(probs, obs, bins=10, nboot=500,
   #
   # Example:
   #
-  #    N <- 1000
-  #    p <- rbeta(N, 1, 3)
-  #    y <- rbinom(N, 1, p)
-  #    rd <- ReliabilityDiagram(p, y, plot=TRUE)
-  #    print(rd)
+  #  N <- 1000
+  #  p <- rbeta(N, 1, 3)
+  #  y <- rbinom(N, 1, p)
+  #  rd <- ReliabilityDiagram(p, y, plot=TRUE)
+  #  print(rd)
   #
   #
   # change log:
   #
+  #  2015/11/05
+  #  * added p.counts to output
+  #  
   #  2015/06/15
   #  * added option `attributes` 
   #
@@ -200,7 +203,8 @@ function(probs, obs, bins=10, nboot=500,
   # return data
   #############################################
   ret.df <- data.frame(p.avgs=p.avgs, cond.probs=obar.i, 
-                       cbar.lo=cons.bars[1,], cbar.hi=cons.bars[2,])
+                       cbar.lo=cons.bars[1,], cbar.hi=cons.bars[2,], 
+                       p.counts=h)
   return(ret.df)
 }
 
