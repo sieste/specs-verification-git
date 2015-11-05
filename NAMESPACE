@@ -1,6 +1,6 @@
 importFrom("grDevices", "gray")
 importFrom("graphics", "axis", "barplot", "box", "hist", "lines",
-           "mtext", "par", "plot", "points", "polygon")
+           "mtext", "par", "plot", "points", "polygon", "abline", "text")
 importFrom("stats", "coef", "cov", "dist", "dnorm", "fitted", "glm",
            "lm", "optim", "pbinom", "pchisq", "pnorm", "pt", "qt",
            "quantile", "rbinom", "rnorm", "sd", "var", "cor", "qnorm")
